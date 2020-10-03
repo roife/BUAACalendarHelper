@@ -13,6 +13,17 @@
 		3208651F2528836A00B169D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3208651E2528836A00B169D3 /* Preview Assets.xcassets */; };
 		3208652A2528836A00B169D3 /* BUAACalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865292528836A00B169D3 /* BUAACalTests.swift */; };
 		320865352528836A00B169D3 /* BUAACalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865342528836A00B169D3 /* BUAACalUITests.swift */; };
+		320865512528838400B169D3 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865452528838400B169D3 /* PagerView.swift */; };
+		320865522528838400B169D3 /* CalendarEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865472528838400B169D3 /* CalendarEventModel.swift */; };
+		320865532528838400B169D3 /* CalendarMonthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865482528838400B169D3 /* CalendarMonthModel.swift */; };
+		320865542528838400B169D3 /* CalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208654A2528838400B169D3 /* CalendarMonthView.swift */; };
+		320865552528838400B169D3 /* CalendarMonthHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208654B2528838400B169D3 /* CalendarMonthHeader.swift */; };
+		320865562528838400B169D3 /* CalendarViewDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208654C2528838400B169D3 /* CalendarViewDay.swift */; };
+		320865572528838400B169D3 /* CalendarList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208654D2528838400B169D3 /* CalendarList.swift */; };
+		320865592528838400B169D3 /* CalendarUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865502528838400B169D3 /* CalendarUtils.swift */; };
+		3208658325289A7900B169D3 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208658225289A7900B169D3 /* EventCard.swift */; };
+		320865902528A03100B169D3 /* CalendarEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208658F2528A03100B169D3 /* CalendarEventDataModel.swift */; };
+		32C86C5B2528B7B8003E73D5 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +56,17 @@
 		320865302528836A00B169D3 /* BUAACalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BUAACalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		320865342528836A00B169D3 /* BUAACalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUAACalUITests.swift; sourceTree = "<group>"; };
 		320865362528836A00B169D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		320865452528838400B169D3 /* PagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
+		320865472528838400B169D3 /* CalendarEventModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventModel.swift; sourceTree = "<group>"; };
+		320865482528838400B169D3 /* CalendarMonthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarMonthModel.swift; sourceTree = "<group>"; };
+		3208654A2528838400B169D3 /* CalendarMonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarMonthView.swift; sourceTree = "<group>"; };
+		3208654B2528838400B169D3 /* CalendarMonthHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarMonthHeader.swift; sourceTree = "<group>"; };
+		3208654C2528838400B169D3 /* CalendarViewDay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewDay.swift; sourceTree = "<group>"; };
+		3208654D2528838400B169D3 /* CalendarList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarList.swift; sourceTree = "<group>"; };
+		320865502528838400B169D3 /* CalendarUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarUtils.swift; sourceTree = "<group>"; };
+		3208658225289A7900B169D3 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
+		3208658F2528A03100B169D3 /* CalendarEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventDataModel.swift; sourceTree = "<group>"; };
+		32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +117,9 @@
 		320865162528836900B169D3 /* BUAACal */ = {
 			isa = PBXGroup;
 			children = (
+				3208657925288C1A00B169D3 /* Views */,
+				3208654E2528838400B169D3 /* Utilities */,
+				320865462528838400B169D3 /* Models */,
 				320865172528836900B169D3 /* BUAACalApp.swift */,
 				320865192528836900B169D3 /* ContentView.swift */,
 				3208651B2528836A00B169D3 /* Assets.xcassets */,
@@ -128,6 +153,62 @@
 				320865362528836A00B169D3 /* Info.plist */,
 			);
 			path = BUAACalUITests;
+			sourceTree = "<group>";
+		};
+		320865462528838400B169D3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				320865472528838400B169D3 /* CalendarEventModel.swift */,
+				3208658F2528A03100B169D3 /* CalendarEventDataModel.swift */,
+				320865482528838400B169D3 /* CalendarMonthModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		320865492528838400B169D3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				3208657E25288C5500B169D3 /* EventCard */,
+				3208657D25288C4700B169D3 /* Calendar */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3208654E2528838400B169D3 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				320865502528838400B169D3 /* CalendarUtils.swift */,
+				32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3208657925288C1A00B169D3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3208654D2528838400B169D3 /* CalendarList.swift */,
+				320865452528838400B169D3 /* PagerView.swift */,
+				320865492528838400B169D3 /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3208657D25288C4700B169D3 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				3208654A2528838400B169D3 /* CalendarMonthView.swift */,
+				3208654B2528838400B169D3 /* CalendarMonthHeader.swift */,
+				3208654C2528838400B169D3 /* CalendarViewDay.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		3208657E25288C5500B169D3 /* EventCard */ = {
+			isa = PBXGroup;
+			children = (
+				3208658225289A7900B169D3 /* EventCard.swift */,
+			);
+			path = EventCard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +340,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				320865552528838400B169D3 /* CalendarMonthHeader.swift in Sources */,
+				320865532528838400B169D3 /* CalendarMonthModel.swift in Sources */,
+				320865592528838400B169D3 /* CalendarUtils.swift in Sources */,
+				3208658325289A7900B169D3 /* EventCard.swift in Sources */,
+				320865902528A03100B169D3 /* CalendarEventDataModel.swift in Sources */,
 				3208651A2528836900B169D3 /* ContentView.swift in Sources */,
+				32C86C5B2528B7B8003E73D5 /* ExtensionColor.swift in Sources */,
+				320865562528838400B169D3 /* CalendarViewDay.swift in Sources */,
+				320865512528838400B169D3 /* PagerView.swift in Sources */,
+				320865572528838400B169D3 /* CalendarList.swift in Sources */,
+				320865542528838400B169D3 /* CalendarMonthView.swift in Sources */,
+				320865522528838400B169D3 /* CalendarEventModel.swift in Sources */,
 				320865182528836900B169D3 /* BUAACalApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"BUAACal/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
@@ -428,8 +521,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = roife.BUAACal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -438,6 +532,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"BUAACal/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
@@ -449,8 +544,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = roife.BUAACal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
