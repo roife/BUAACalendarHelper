@@ -26,8 +26,9 @@ struct EventCard: View {
                                       design: .rounded))
                         .padding(.bottom, 3)
                     
-                    Text("01:30 ~ 04:20")
+                    Text("\(data.getStartTimeAsString) ~ \(data.getEndTimeAsString)")
                         .font(.system(size: 16,
+                                      weight: .semibold,
                                       design: .rounded))
                 }
                 
@@ -40,9 +41,9 @@ struct EventCard: View {
                 }
             }
         }
-        .padding(20)
+        .padding(15)
         .background(colorScheme == .light ? colorNumbersLight[data.brightColorNumber] : colorNumbers[data.darkColorNumber])
-        .cornerRadius(20)
+        .cornerRadius(15)
         //        .padding(.bottom)
     }
 }

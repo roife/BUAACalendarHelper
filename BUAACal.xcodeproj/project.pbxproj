@@ -23,7 +23,10 @@
 		320865592528838400B169D3 /* CalendarUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865502528838400B169D3 /* CalendarUtils.swift */; };
 		3208658325289A7900B169D3 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208658225289A7900B169D3 /* EventCard.swift */; };
 		320865902528A03100B169D3 /* CalendarEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208658F2528A03100B169D3 /* CalendarEventDataModel.swift */; };
+		32A2B8C025290F110025BDCD /* UpdatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A2B8BF25290F110025BDCD /* UpdatingViewModel.swift */; };
 		32C86C5B2528B7B8003E73D5 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */; };
+		32C86C632528E031003E73D5 /* LoginSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C622528E031003E73D5 /* LoginSheet.swift */; };
+		32C86C6C2528E1AA003E73D5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C6B2528E1AA003E73D5 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +69,10 @@
 		320865502528838400B169D3 /* CalendarUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarUtils.swift; sourceTree = "<group>"; };
 		3208658225289A7900B169D3 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		3208658F2528A03100B169D3 /* CalendarEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventDataModel.swift; sourceTree = "<group>"; };
+		32A2B8BF25290F110025BDCD /* UpdatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatingViewModel.swift; sourceTree = "<group>"; };
 		32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
+		32C86C622528E031003E73D5 /* LoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheet.swift; sourceTree = "<group>"; };
+		32C86C6B2528E1AA003E73D5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +123,7 @@
 		320865162528836900B169D3 /* BUAACal */ = {
 			isa = PBXGroup;
 			children = (
+				32C86C6A2528E17A003E73D5 /* ViewModels */,
 				3208657925288C1A00B169D3 /* Views */,
 				3208654E2528838400B169D3 /* Utilities */,
 				320865462528838400B169D3 /* Models */,
@@ -186,8 +193,9 @@
 		3208657925288C1A00B169D3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3208654D2528838400B169D3 /* CalendarList.swift */,
 				320865452528838400B169D3 /* PagerView.swift */,
+				3208654D2528838400B169D3 /* CalendarList.swift */,
+				32C86C622528E031003E73D5 /* LoginSheet.swift */,
 				320865492528838400B169D3 /* Components */,
 			);
 			path = Views;
@@ -209,6 +217,15 @@
 				3208658225289A7900B169D3 /* EventCard.swift */,
 			);
 			path = EventCard;
+			sourceTree = "<group>";
+		};
+		32C86C6A2528E17A003E73D5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				32C86C6B2528E1AA003E73D5 /* LoginViewModel.swift */,
+				32A2B8BF25290F110025BDCD /* UpdatingViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -341,12 +358,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				320865552528838400B169D3 /* CalendarMonthHeader.swift in Sources */,
+				32A2B8C025290F110025BDCD /* UpdatingViewModel.swift in Sources */,
 				320865532528838400B169D3 /* CalendarMonthModel.swift in Sources */,
 				320865592528838400B169D3 /* CalendarUtils.swift in Sources */,
+				32C86C632528E031003E73D5 /* LoginSheet.swift in Sources */,
 				3208658325289A7900B169D3 /* EventCard.swift in Sources */,
 				320865902528A03100B169D3 /* CalendarEventDataModel.swift in Sources */,
 				3208651A2528836900B169D3 /* ContentView.swift in Sources */,
 				32C86C5B2528B7B8003E73D5 /* ExtensionColor.swift in Sources */,
+				32C86C6C2528E1AA003E73D5 /* LoginViewModel.swift in Sources */,
 				320865562528838400B169D3 /* CalendarViewDay.swift in Sources */,
 				320865512528838400B169D3 /* PagerView.swift in Sources */,
 				320865572528838400B169D3 /* CalendarList.swift in Sources */,

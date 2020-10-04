@@ -25,11 +25,16 @@ public struct CalendarList<T:Hashable, Content:View>: View {
     
     @State public var selectedDate:Date = Date()
     
+    @State public var isLoginSheetPresented = false
+    @State public var isUpdating = false
+    
+    @ObservedObject var updatingVM = UpdatingViewModel()
+    
     private let calendarDayHeight:CGFloat = 60
     private let calendar:Calendar
     
     private var events:[Date:[CalendarEvent<T>]]
-        
+    
     private var viewForEventBlock:(CalendarEvent<T>) -> Content
     
     private var selectedDateColor:Color
@@ -62,17 +67,26 @@ public struct CalendarList<T:Hashable, Content:View>: View {
     }
     
     public var body: some View {
-        NavigationView {
-            commonBody
-            .navigationBarTitle("\(self.months[self.currentPage].monthTitle())", displayMode: .inline)
+        if isUpdating {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
+                .onAppear() {
+                    updatingVM.updateEvents()
+                }
+        } else {
+            NavigationView {
+                commonBody
+                    .navigationBarTitle("\(self.months[self.currentPage].monthTitle())", displayMode: .inline)
+                    .navigationBarItems(leading: leadingButtons(), trailing: trailingButtons())
+            }
         }
     }
-
+    
     public var commonBody: some View {
         VStack {
             VStack {
                 CalendarMonthHeader(calendar: self.months[1].calendar, calendarDayHeight: self.calendarDayHeight)
-                                
+                
                 HStack(alignment: .top) {
                     PagerView(pageCount: self.months.count, currentIndex: self.$currentPage, pageChanged: self.updateMonthsAfterPagerSwipe) {
                         ForEach(self.months, id:\.key) { month in
@@ -90,7 +104,7 @@ public struct CalendarList<T:Hashable, Content:View>: View {
             }
             
             Divider()
-                        
+            
             List {
                 ForEach(eventsForSelectedDate(), id:\.data) { event in
                     self.viewForEventBlock(event)
@@ -122,5 +136,38 @@ public struct CalendarList<T:Hashable, Content:View>: View {
         
         return self.events[actualDay] ?? []
     }
+    
+    func leadingButtons() -> some View {
+        Button(action: {
+            withAnimation {
+                self.months = self.months.first!.getSurroundingMonths()
+            }
+        }) {
+            Image(systemName: "calendar.badge.plus").font(.title2)
+        }
+    }
+    
+    func trailingButtons() -> some View {
+        HStack {
+            Button(action: {
+                withAnimation {
+                    self.months = CalendarMonth.getSurroundingMonths(forDate: Date(), andCalendar: Calendar.current)
+                    self.selectedDate = Date()
+                }
+            }) {
+                Image(systemName: "arrow.2.circlepath").font(.title2)
+            }
+            .padding(.trailing, 10)
+            
+            Button(action: {
+                self.isLoginSheetPresented.toggle()
+            }) {
+                Image(systemName: "person.crop.circle").font(.title2)
+            }
+            .sheet(isPresented: $isLoginSheetPresented) {
+                LoginSheet(isLoginSheetPresented: $isLoginSheetPresented,
+                           isUpdating: $isUpdating)
+            }
+        }
+    }
 }
-

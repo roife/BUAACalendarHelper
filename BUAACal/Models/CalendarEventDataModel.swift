@@ -16,4 +16,14 @@ struct CalendarEventDataModel: Hashable {
     let locationName: String
     let brightColorNumber: Int
     let darkColorNumber: Int
+    
+    var getStartTimeAsString: String {
+        let hm = Calendar.current.dateComponents([.hour, .minute], from: startTime)
+        return "\(String(hm.hour!)):\(String(hm.minute!))"
+    }
+    
+    var getEndTimeAsString: String {
+        let hm = Calendar.current.dateComponents([.hour, .minute], from: endTime)
+        return "\(String(hm.hour!)):\(String(hm.minute!))"
+    }
 }
