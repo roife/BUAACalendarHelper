@@ -19,23 +19,23 @@ import SwiftUI
 ///   - todayDateColor: color used to highlight the current day. Defaults to the accent color with 0.3 opacity.
 ///   - viewForEvent: `@ViewBuilder` block to generate a view per every event on the selected date. All the generated views for a given day will be presented in a `List`.
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
-public struct CalendarList<T:Hashable, Content:View>: View {
+public struct CalendarList<Content: View>: View {
     @State private var months:[CalendarMonth]
     @State private var currentPage = 1
     
     @State public var selectedDate:Date = Date()
     
     @State public var isLoginSheetPresented = false
-    @State public var isUpdating = false
+//    @State public var isUpdating = false
     
     @ObservedObject var updatingVM = UpdatingViewModel()
     
     private let calendarDayHeight:CGFloat = 60
     private let calendar:Calendar
     
-    private var events:[Date:[CalendarEvent<T>]]
+//    private var events:[Date:[CalendarEvent<T>]]
     
-    private var viewForEventBlock:(CalendarEvent<T>) -> Content
+    private var viewForEventBlock:(CalendarEvent<CalendarEventDataModel>) -> Content
     
     private var selectedDateColor:Color
     private var todayDateColor:Color
@@ -50,24 +50,24 @@ public struct CalendarList<T:Hashable, Content:View>: View {
     ///   - viewForEvent: `@ViewBuilder` block to generate a view per every event on the selected date. All the generated views for a given day will be presented in a `List`.
     public init(initialDate:Date = Date(),
                 calendar:Calendar = Calendar.current,
-                events:[CalendarEvent<T>],
+                events:[CalendarEvent<CalendarEventDataModel>],
                 selectedDateColor:Color = colorNumbersLight[0],
                 todayDateColor:Color = colorNumbersLight[0].opacity(0.3),
-                @ViewBuilder viewForEvent: @escaping (CalendarEvent<T>) -> Content) {
+                @ViewBuilder viewForEvent: @escaping (CalendarEvent<CalendarEventDataModel>) -> Content) {
         
         self.calendar = calendar
         _months = State(initialValue: CalendarMonth.getSurroundingMonths(forDate: initialDate, andCalendar: calendar))
         
-        self.events = Dictionary(grouping: events, by: { $0.date })
+        self.viewForEventBlock = viewForEvent
         
         self.selectedDateColor = selectedDateColor
         self.todayDateColor = todayDateColor
         
-        self.viewForEventBlock = viewForEvent
+        updatingVM.events = Dictionary<Date, [CalendarEvent<CalendarEventDataModel>]>(grouping: events, by: { $0.date })
     }
     
     public var body: some View {
-        if isUpdating {
+        if updatingVM.isUpdating {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .onAppear() {
@@ -94,7 +94,7 @@ public struct CalendarList<T:Hashable, Content:View>: View {
                                               calendar: self.months[1].calendar,
                                               selectedDate: self.$selectedDate,
                                               calendarDayHeight: self.calendarDayHeight,
-                                              eventsForDate: self.events,
+                                              eventsForDate: updatingVM.events,
                                               selectedDateColor: self.selectedDateColor,
                                               todayDateColor: self.todayDateColor)
                         }
@@ -131,10 +131,10 @@ public struct CalendarList<T:Hashable, Content:View>: View {
         self.currentPage = 1
     }
     
-    func eventsForSelectedDate() -> [CalendarEvent<T>] {
+    func eventsForSelectedDate() -> [CalendarEvent<CalendarEventDataModel>] {
         let actualDay = CalendarUtils.resetHourPart(of: self.selectedDate, calendar:self.calendar)
         
-        return self.events[actualDay] ?? []
+        return updatingVM.events[actualDay] ?? []
     }
     
     func leadingButtons() -> some View {
@@ -166,7 +166,7 @@ public struct CalendarList<T:Hashable, Content:View>: View {
             }
             .sheet(isPresented: $isLoginSheetPresented) {
                 LoginSheet(isLoginSheetPresented: $isLoginSheetPresented,
-                           isUpdating: $isUpdating)
+                           isUpdating: $updatingVM.isUpdating)
             }
         }
     }

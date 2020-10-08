@@ -28,6 +28,9 @@ struct LoginSheet: View {
                         loginVM.login()
                         self.isLoginSheetPresented.toggle()
                         self.isUpdating.toggle()
+                        if 1 == 2 {
+                            
+                        }
                     }
                 }
             }

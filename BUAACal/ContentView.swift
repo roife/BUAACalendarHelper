@@ -28,7 +28,7 @@ struct ContentView: View {
         ]
         
         var body: some View {
-            CalendarList(events: self.events) { event in
+            CalendarList<EventCard>(events: self.events) { event in
                 EventCard(data: event.data)
             }
         }
