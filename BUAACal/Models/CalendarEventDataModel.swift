@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-public struct CalendarEventDataModel: Hashable {
+public struct CalendarEventDataModel: Equatable, Hashable {
     let eventName: String
     let startTime: Date
     let endTime: Date

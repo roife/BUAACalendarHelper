@@ -71,7 +71,7 @@ public struct CalendarList<Content: View>: View {
     
     public var body: some View {
         if updatingVM.isUpdating {
-            ProgressView("正在获取课程表...")
+            ProgressView("正在获取课程表\n可能需要一点时间...")
                 .progressViewStyle(CircularProgressViewStyle())
                 .onAppear() {
                     updatingVM.updateEvents()

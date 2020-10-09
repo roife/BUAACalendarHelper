@@ -140,11 +140,10 @@ class UpdatingViewModel:ObservableObject {
                                                      day.c_12 ?? [],
                                                      day.c_13 ?? [],
                                                      day.c_14 ?? []]
-                        
+                        // TODO: 去重
                         for c_i in c_n {
                             for course in c_i {
                                 let courseTime = course.course_time.split(separator: "~")
-                                print(weekdays[index] + courseTime[0])
 
                                 if let startTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[0]),
                                    let endTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[1]) {

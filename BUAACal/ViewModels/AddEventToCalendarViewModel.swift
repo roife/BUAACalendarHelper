@@ -27,8 +27,8 @@ class AddEventToCalendarViewModel:ObservableObject {
                 let event:EKEvent = EKEvent(eventStore: eventStore)
                 
                 event.title = course.data.eventName
-                event.startDate = Date()
-                event.endDate = Date()
+                event.startDate = course.data.startTime
+                event.endDate = course.data.endTime
                 event.notes = course.data.indicatorName
                 event.location = course.data.locationName
                 event.calendar = eventStore.defaultCalendarForNewEvents
