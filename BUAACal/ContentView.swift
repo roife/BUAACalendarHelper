@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    var events = [
-            CalendarEvent(dateString: "10/04/2020",
+    var events:[CalendarEvent<CalendarEventDataModel>] = [
+            CalendarEvent(dateString: "2020-10-04",
                           data: CalendarEventDataModel(eventName: "如何爬爬",
                                                        startTime: Date(),
                                                        endTime: Date(),
@@ -17,7 +17,7 @@ struct ContentView: View {
                                                        locationName: "543",
                                                        brightColorNumber: 0,
                                                        darkColorNumber: 0)),
-            CalendarEvent(dateString: "10/04/2020",
+            CalendarEvent(dateString: "2020-10-09",
                           data: CalendarEventDataModel(eventName: "如何膜佬",
                                                        startTime: Date(),
                                                        endTime: Date(),

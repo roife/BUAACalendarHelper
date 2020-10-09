@@ -22,7 +22,7 @@ public struct CalendarEvent<T:Hashable> {
         self.date = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: date)!
     }
     
-    public init(calendar:Calendar = Calendar.current, dateString:String, dateFormat:String = "MM/dd/yyyy", data:T) {
+    public init(calendar:Calendar = Calendar.current, dateString:String, dateFormat:String = "yyyy-MM-dd", data:T) {
         self.calendar = calendar
         self.data = data
         

@@ -2,7 +2,7 @@
 //  LoginSheet.swift
 //  BUAACal
 //
-//  Created by 吴家焱 on 10/4/20.
+//  Created by roife on 10/4/20.
 //
 
 import SwiftUI
