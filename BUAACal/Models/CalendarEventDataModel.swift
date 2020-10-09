@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-public struct CalendarEventDataModel: Equatable, Hashable {
+public struct CalendarEventDataModel:Hashable {
     let eventName: String
     let startTime: Date
     let endTime: Date
-    let indicatorName: String
+    var indicatorName: String
     let locationName: String
     let brightColorNumber: Int
     let darkColorNumber: Int

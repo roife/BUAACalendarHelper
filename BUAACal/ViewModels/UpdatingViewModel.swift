@@ -11,7 +11,6 @@ import SwiftUI
 class UpdatingViewModel:ObservableObject {
     @Published var isUpdating: Bool = false
     @Published var events: [Date:[CalendarEvent<CalendarEventDataModel>]] = [:]
-    @Published var courses: [CalendarEvent<CalendarEventDataModel>] = []
     
     struct eachClassJson:Codable {
         let id: String
@@ -80,8 +79,7 @@ class UpdatingViewModel:ObservableObject {
         request.setValue("\(cookieName)=\(cookie)", forHTTPHeaderField: "Cookie")
         
         var cntFinished = 0;
-        courses = []
-        events = [:]
+        self.events = [:]
         
         for week in 1...19 {
             let body: [String: Any] = [
@@ -93,13 +91,10 @@ class UpdatingViewModel:ObservableObject {
             
             request.httpBody = body.percentEncoded()
             
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
                 cntFinished += 1
                 if cntFinished == 19 {
                     self.isUpdating.toggle()
-                    self.events = Dictionary<Date, [CalendarEvent<CalendarEventDataModel>]>(grouping: self.courses,
-                                                                                            by: { $0.date })
-                    
                 }
                 
                 guard let _ = data,
@@ -124,7 +119,8 @@ class UpdatingViewModel:ObservableObject {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
                 
-                if let days = json.d?.classes, let weekdays = json.d?.weekdays {
+                if let days = json.d?.classes,
+                   let weekdays = json.d?.weekdays {
                     for (index, day) in days.enumerated() {
                         let c_n:[[eachClassJson]] = [day.c_1 ?? [],
                                                      day.c_2 ?? [],
@@ -140,22 +136,36 @@ class UpdatingViewModel:ObservableObject {
                                                      day.c_12 ?? [],
                                                      day.c_13 ?? [],
                                                      day.c_14 ?? []]
-                        // TODO: 去重
                         for c_i in c_n {
                             for course in c_i {
                                 let courseTime = course.course_time.split(separator: "~")
-
+                                
                                 if let startTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[0]),
                                    let endTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[1]) {
-                                    self.courses.append(
-                                        CalendarEvent(dateString: weekdays[index],
-                                                      data: CalendarEventDataModel(eventName: course.course_name,
-                                                                                   startTime: startTime,
-                                                                                   endTime: endTime,
-                                                                                   indicatorName: course.teacher,
-                                                                                   locationName: course.location,
-                                                                                   brightColorNumber: 01,
-                                                                                   darkColorNumber: 01)))
+                                    let event = CalendarEvent(dateString: weekdays[index],
+                                                              data: CalendarEventDataModel(eventName: course.course_name,
+                                                                                           startTime: startTime,
+                                                                                           endTime: endTime,
+                                                                                           indicatorName: course.teacher,
+                                                                                           locationName: course.location,
+                                                                                           brightColorNumber: 01,
+                                                                                           darkColorNumber: 01))
+                                    let date = event.date
+                                    
+                                    if self.events[date] != nil {
+                                        if let duplicatedCourseIndex = self.events[event.date]?
+                                            .firstIndex(where: { $0.data.startTime == startTime  }) {
+                                            if ((self.events[date]?[duplicatedCourseIndex].data.indicatorName
+                                                    .split(separator: ",")
+                                                    .first(where: { $0 == course.teacher })) == nil) {
+                                                self.events[date]?[duplicatedCourseIndex].data.indicatorName += "," + course.teacher
+                                            }
+                                        } else {
+                                            self.events[date]?.append(event)
+                                        }
+                                    } else {
+                                        self.events[date] = [event]
+                                    }
                                 }
                             }
                         }

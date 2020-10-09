@@ -10,7 +10,7 @@ import Foundation
 
 /// Type to store a speficic data point a given date. Date will be striped of hour/minute/second components.
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
-public struct CalendarEvent<T:Hashable> {
+public struct CalendarEvent<T:Hashable>:Hashable {
     public var date:Date
     public var data:T
     
