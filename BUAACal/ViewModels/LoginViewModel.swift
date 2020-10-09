@@ -12,6 +12,14 @@ class LoginViewModel:ObservableObject {
     @Published var email:String = ""
     @Published var password:String = ""
     
+    struct EmptyStruct:Codable {}
+    
+    struct resJson:Codable {
+        let e: Int
+        let m: String
+        let d: EmptyStruct?
+    }
+    
     func login() {
         let url = URL(string: "https://app.buaa.edu.cn/uc/wap/login/check")
         var request = URLRequest(url: url!)
@@ -41,10 +49,16 @@ class LoginViewModel:ObservableObject {
                 return
             }
             
-//            let cookieName = "eai-sess"
-//            if let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == cookieName }) {
-//                print("\(cookieName): \(cookie.value)")
-//            }
+            let responseString = String(data: data!, encoding: .utf8)
+            
+            let decoder = JSONDecoder()
+            let json = try! decoder.decode(resJson.self,
+                                           from: responseString!.data(using: .utf8)!)
+            // TODO: 处理登录失败的情况
+            if json.e == 403 {
+
+                return
+            }
         }
         
         task.resume()

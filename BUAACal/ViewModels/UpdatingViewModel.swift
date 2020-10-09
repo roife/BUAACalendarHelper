@@ -11,7 +11,7 @@ import SwiftUI
 class UpdatingViewModel:ObservableObject {
     @Published var isUpdating: Bool = false
     @Published var events: [Date:[CalendarEvent<CalendarEventDataModel>]] = [:]
-    var courses: [CalendarEvent<CalendarEventDataModel>] = []
+    @Published var courses: [CalendarEvent<CalendarEventDataModel>] = []
     
     struct eachClassJson:Codable {
         let id: String
@@ -121,33 +121,43 @@ class UpdatingViewModel:ObservableObject {
                 let json = try! decoder.decode(resJson.self,
                                                from: responseString!.data(using: .utf8)!)
                 
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                
                 if let days = json.d?.classes, let weekdays = json.d?.weekdays {
                     for (index, day) in days.enumerated() {
                         let c_n:[[eachClassJson]] = [day.c_1 ?? [],
-                                                   day.c_2 ?? [],
-                                                   day.c_3 ?? [],
-                                                   day.c_4 ?? [],
-                                                   day.c_5 ?? [],
-                                                   day.c_6 ?? [],
-                                                   day.c_7 ?? [],
-                                                   day.c_8 ?? [],
-                                                   day.c_9 ?? [],
-                                                   day.c_10 ?? [],
-                                                   day.c_11 ?? [],
-                                                   day.c_12 ?? [],
-                                                   day.c_13 ?? [],
-                                                   day.c_14 ?? []]
+                                                     day.c_2 ?? [],
+                                                     day.c_3 ?? [],
+                                                     day.c_4 ?? [],
+                                                     day.c_5 ?? [],
+                                                     day.c_6 ?? [],
+                                                     day.c_7 ?? [],
+                                                     day.c_8 ?? [],
+                                                     day.c_9 ?? [],
+                                                     day.c_10 ?? [],
+                                                     day.c_11 ?? [],
+                                                     day.c_12 ?? [],
+                                                     day.c_13 ?? [],
+                                                     day.c_14 ?? []]
+                        
                         for c_i in c_n {
                             for course in c_i {
-                                self.courses.append(
-                                    CalendarEvent(dateString: weekdays[index],
-                                                  data: CalendarEventDataModel(eventName: course.course_name,
-                                                                               startTime: Date(),
-                                                                               endTime: Date(),
-                                                                               indicatorName: course.teacher,
-                                                                               locationName: course.location,
-                                                                               brightColorNumber: 01,
-                                                                               darkColorNumber: 01)))
+                                let courseTime = course.course_time.split(separator: "~")
+                                print(weekdays[index] + courseTime[0])
+
+                                if let startTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[0]),
+                                   let endTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[1]) {
+                                    self.courses.append(
+                                        CalendarEvent(dateString: weekdays[index],
+                                                      data: CalendarEventDataModel(eventName: course.course_name,
+                                                                                   startTime: startTime,
+                                                                                   endTime: endTime,
+                                                                                   indicatorName: course.teacher,
+                                                                                   locationName: course.location,
+                                                                                   brightColorNumber: 01,
+                                                                                   darkColorNumber: 01)))
+                                }
                             }
                         }
                     }

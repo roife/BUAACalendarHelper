@@ -21,7 +21,7 @@ struct CalendarMonthHeader:View {
                     ForEach(CalendarUtils.weekdays, id:\.self) { weekday in
                         Text("\(weekday)")
                             .fontWeight(.semibold)
-                            .frame(width: (geometry.size.width - 20) / 7,
+                            .frame(width: abs((geometry.size.width - 20) / 7),
                                    height: self.calendarDayHeight/2)
                     }
                     Spacer()

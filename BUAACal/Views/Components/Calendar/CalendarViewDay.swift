@@ -36,7 +36,7 @@ struct CalendarViewDay: View {
             }
         }
         .padding(8)
-        .frame(width: self.width)
+        .frame(width: abs(self.width))
         .background(Circle()
                         .foregroundColor(dateColor())
                         .padding(0))

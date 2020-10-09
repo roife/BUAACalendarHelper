@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginSheet: View {
     @Binding var isLoginSheetPresented:Bool
     @Binding var isUpdating:Bool
+    @Binding var isLogined:Bool
     @ObservedObject var loginVM = LoginViewModel()
     
     var body: some View {
@@ -28,9 +29,7 @@ struct LoginSheet: View {
                         loginVM.login()
                         self.isLoginSheetPresented.toggle()
                         self.isUpdating.toggle()
-                        if 1 == 2 {
-                            
-                        }
+                        self.isLogined = true
                     }
                 }
             }
@@ -38,9 +37,3 @@ struct LoginSheet: View {
         }
     }
 }
-
-//struct LoginSheet_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LoginSheet()
-//    }
-//}

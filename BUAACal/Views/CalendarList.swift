@@ -25,15 +25,18 @@ public struct CalendarList<Content: View>: View {
     
     @State public var selectedDate:Date = Date()
     
+    @State public var isLogined = false
     @State public var isLoginSheetPresented = false
-//    @State public var isUpdating = false
+    @State public var showAlert = false
+    //    @State public var isUpdating = false
     
     @ObservedObject var updatingVM = UpdatingViewModel()
+    @ObservedObject var addEventVM = AddEventToCalendarViewModel()
     
     private let calendarDayHeight:CGFloat = 60
     private let calendar:Calendar
     
-//    private var events:[Date:[CalendarEvent<T>]]
+    //    private var events:[Date:[CalendarEvent<T>]]
     
     private var viewForEventBlock:(CalendarEvent<CalendarEventDataModel>) -> Content
     
@@ -68,7 +71,7 @@ public struct CalendarList<Content: View>: View {
     
     public var body: some View {
         if updatingVM.isUpdating {
-            ProgressView()
+            ProgressView("正在获取课程表...")
                 .progressViewStyle(CircularProgressViewStyle())
                 .onAppear() {
                     updatingVM.updateEvents()
@@ -140,7 +143,7 @@ public struct CalendarList<Content: View>: View {
     func leadingButtons() -> some View {
         Button(action: {
             withAnimation {
-                self.months = self.months.first!.getSurroundingMonths()
+                self.addEventVM.addEventToCalendar(courses: updatingVM.courses)
             }
         }) {
             Image(systemName: "calendar.badge.plus").font(.title2)
@@ -150,12 +153,17 @@ public struct CalendarList<Content: View>: View {
     func trailingButtons() -> some View {
         HStack {
             Button(action: {
-                withAnimation {
-                    self.months = CalendarMonth.getSurroundingMonths(forDate: Date(), andCalendar: Calendar.current)
-                    self.selectedDate = Date()
+                if isLogined {
+                    updatingVM.isUpdating = true
+                    updatingVM.updateEvents()
+                } else {
+                    self.showAlert = true
                 }
             }) {
                 Image(systemName: "arrow.2.circlepath").font(.title2)
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("登陆"), message: Text("需要登录之后才能更新课表！"), dismissButton: .default(Text("Got it!")))
             }
             .padding(.trailing, 10)
             
@@ -166,7 +174,8 @@ public struct CalendarList<Content: View>: View {
             }
             .sheet(isPresented: $isLoginSheetPresented) {
                 LoginSheet(isLoginSheetPresented: $isLoginSheetPresented,
-                           isUpdating: $updatingVM.isUpdating)
+                           isUpdating: $updatingVM.isUpdating,
+                           isLogined: $isLogined)
             }
         }
     }

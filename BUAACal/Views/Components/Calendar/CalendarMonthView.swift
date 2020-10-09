@@ -30,7 +30,7 @@ struct CalendarMonthView<T:Hashable>: View {
                         if week.count < 7 && self.containsFirstDayOfMonth(week) {
                             ForEach(1 ... 7 - week.count, id:\.self) { num in
                                 Text("")
-                                    .frame(width: self.dayViewWidth(parentWidth: geometry.size.width),
+                                    .frame(width: abs(self.dayViewWidth(parentWidth: abs(geometry.size.width))),
                                            height: self.calendarDayHeight)
                                 
                             }
@@ -55,7 +55,7 @@ struct CalendarMonthView<T:Hashable>: View {
                         if week.count < 7 && !self.containsFirstDayOfMonth(week) {
                             ForEach(1 ... 7 - week.count, id:\.self) { num in
                                 Text("")
-                                    .frame(width: self.dayViewWidth(parentWidth: geometry.size.width),
+                                    .frame(width: abs(self.dayViewWidth(parentWidth: abs(geometry.size.width))),
                                            height: self.calendarDayHeight)
                             }
                         }
