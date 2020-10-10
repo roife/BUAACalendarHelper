@@ -51,7 +51,7 @@ public enum EventCardColor: Int {
 
 public let colorNumbers: [Color] = [
     Color(UIColor(hexString: "#D4DFE6")),
-    Color(UIColor(hexString: "#FF8E6E")),
+    Color(UIColor(hexString: "#7EB0D4")),
     Color(UIColor(hexString: "#A5E17C")),
     Color(UIColor(hexString: "#FFDE41")),
     Color(UIColor(hexString: "#71EFBA")),
@@ -62,7 +62,7 @@ public let colorNumbers: [Color] = [
 
 public let colorNumbersLight: [Color] = [
     Color(UIColor(hexString: "#C5E99B")),
-    Color(UIColor(hexString: "#7EB0D4")),
+    Color(UIColor(hexString: "#D4DFE6")),
     Color(UIColor(hexString: "#B7F48D")),
     Color(UIColor(hexString: "#FFEA85")),
     Color(UIColor(hexString: "#84FFCB")),

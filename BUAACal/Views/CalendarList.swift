@@ -54,8 +54,8 @@ public struct CalendarList<Content: View>: View {
     public init(initialDate:Date = Date(),
                 calendar:Calendar = Calendar.current,
                 events:[CalendarEvent<CalendarEventDataModel>],
-                selectedDateColor:Color = colorNumbersLight[0],
-                todayDateColor:Color = colorNumbersLight[0].opacity(0.3),
+                selectedDateColor:Color = colorNumbersLight[1],
+                todayDateColor:Color = colorNumbersLight[1].opacity(0.3),
                 @ViewBuilder viewForEvent: @escaping (CalendarEvent<CalendarEventDataModel>) -> Content) {
         
         self.calendar = calendar
