@@ -20,7 +20,10 @@ struct LoginSheet: View {
             ProgressView("登录中...")
                 .progressViewStyle(CircularProgressViewStyle())
                 .onDisappear() {
-                    isLoginSheetPresented.toggle()
+                    if !loginFailed {
+                        isLoginSheetPresented.toggle()
+                        
+                    }
                 }
         } else {
             NavigationView {
