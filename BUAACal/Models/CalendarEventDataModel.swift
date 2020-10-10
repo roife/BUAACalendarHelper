@@ -18,12 +18,14 @@ public struct CalendarEventDataModel:Hashable {
     let darkColorNumber: Int
     
     var getStartTimeAsString: String {
-        let hm = Calendar.current.dateComponents([.hour, .minute], from: startTime)
-        return "\(String(hm.hour!)):\(String(hm.minute!))"
+        let dateFormmter = DateFormatter()
+        dateFormmter.dateFormat = "HH:mm"
+        return "\(dateFormmter.string(from: startTime))"
     }
     
     var getEndTimeAsString: String {
-        let hm = Calendar.current.dateComponents([.hour, .minute], from: endTime)
-        return "\(String(hm.hour!)):\(String(hm.minute!))"
+        let dateFormmter = DateFormatter()
+        dateFormmter.dateFormat = "HH:mm"
+        return "\(dateFormmter.string(from: endTime))"
     }
 }
