@@ -13,27 +13,40 @@ struct LoginSheet: View {
     @Binding var isLogined:Bool
     @ObservedObject var loginVM = LoginViewModel()
     
+    @State var loginFailed:Bool = false
+    
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("登录信息北航")) {
-                    TextField("学号", text: $loginVM.email)
-                        .textContentType(.emailAddress)
-                        .keyboardType(.emailAddress)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                    SecureField("密码", text: $loginVM.password)
+        if loginVM.isLogining {
+            ProgressView("登录中...")
+                .progressViewStyle(CircularProgressViewStyle())
+                .onDisappear() {
+                    isLoginSheetPresented.toggle()
                 }
-                Section {
-                    Button ("登录并更新") {
-                        loginVM.login()
-                        self.isLoginSheetPresented.toggle()
-                        self.isUpdating.toggle()
-                        self.isLogined = true
+        } else {
+            NavigationView {
+                Form {
+                    Section(header: Text("登录信息北航")) {
+                        TextField("学号", text: $loginVM.email)
+                            .textContentType(.emailAddress)
+                            .keyboardType(.emailAddress)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                        SecureField("密码", text: $loginVM.password)
+                    }
+                    Section {
+                        Button ("登录并更新") {
+                            loginVM.login(loginSheet: self)
+//                            self.isLoginSheetPresented.toggle()
+//                            self.isUpdating.toggle()
+//                            self.isLogined = true
+                        }
                     }
                 }
+                .navigationBarTitle(Text("登录"), displayMode: .inline)
             }
-            .navigationBarTitle(Text("登录"), displayMode: .inline)
+            .alert(isPresented: $loginFailed) {
+                Alert(title: Text("登陆失败"), message: Text("请检查学号和密码是否输入正确"), dismissButton: .default(Text("好")))
+            }
         }
     }
 }

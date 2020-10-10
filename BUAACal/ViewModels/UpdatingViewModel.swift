@@ -11,6 +11,7 @@ import SwiftUI
 class UpdatingViewModel:ObservableObject {
     @Published var isUpdating: Bool = false
     @Published var events: [Date:[CalendarEvent<CalendarEventDataModel>]] = [:]
+    @Published var cntFinished:Int = 0
     
     struct eachClassJson:Codable {
         let id: String
@@ -78,7 +79,7 @@ class UpdatingViewModel:ObservableObject {
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36", forHTTPHeaderField: "User-Agent")
         request.setValue("\(cookieName)=\(cookie)", forHTTPHeaderField: "Cookie")
         
-        var cntFinished = 0;
+        cntFinished = 0;
         self.events = [:]
         
         for week in 1...19 {
@@ -92,9 +93,12 @@ class UpdatingViewModel:ObservableObject {
             request.httpBody = body.percentEncoded()
             
             let task = URLSession.shared.dataTask(with: request) { [self] data, response, error in
-                cntFinished += 1
-                if cntFinished == 19 {
-                    self.isUpdating.toggle()
+                DispatchQueue.main.async {
+                    cntFinished += 1
+                    if cntFinished == 19 {
+                        self.isUpdating.toggle()
+                    }
+                    print(cntFinished)
                 }
                 
                 guard let _ = data,
@@ -151,21 +155,23 @@ class UpdatingViewModel:ObservableObject {
                                                                                            brightColorNumber: 01,
                                                                                            darkColorNumber: 01))
                                     let date = event.date
-                                    
-                                    if self.events[date] != nil {
-                                        if let duplicatedCourseIndex = self.events[event.date]?
-                                            .firstIndex(where: { $0.data.startTime == startTime  }) {
-                                            if ((self.events[date]?[duplicatedCourseIndex].data.indicatorName
-                                                    .split(separator: ",")
-                                                    .first(where: { $0 == course.teacher })) == nil) {
-                                                self.events[date]?[duplicatedCourseIndex].data.indicatorName += "," + course.teacher
+                                    DispatchQueue.main.async {
+                                        if self.events[date] != nil {
+                                            if let duplicatedCourseIndex = self.events[event.date]?
+                                                .firstIndex(where: { $0.data.startTime == startTime  }) {
+                                                if ((self.events[date]?[duplicatedCourseIndex].data.indicatorName
+                                                        .split(separator: ",")
+                                                        .first(where: { $0 == course.teacher })) == nil) {
+                                                    self.events[date]?[duplicatedCourseIndex].data.indicatorName += "," + course.teacher
+                                                }
+                                            } else {
+                                                self.events[date]?.append(event)
                                             }
                                         } else {
-                                            self.events[date]?.append(event)
+                                            self.events[date] = [event]
                                         }
-                                    } else {
-                                        self.events[date] = [event]
                                     }
+                                    
                                 }
                             }
                         }

@@ -11,6 +11,7 @@ class LoginViewModel:ObservableObject {
     // MARK: Login Info
     @Published var email:String = ""
     @Published var password:String = ""
+    @Published var isLogining:Bool = false
     
     struct EmptyStruct:Codable {}
     
@@ -20,7 +21,7 @@ class LoginViewModel:ObservableObject {
         let d: EmptyStruct?
     }
     
-    func login() {
+    func login(loginSheet: LoginSheet) {
         let url = URL(string: "https://app.buaa.edu.cn/uc/wap/login/check")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
@@ -34,8 +35,13 @@ class LoginViewModel:ObservableObject {
                          forHTTPHeaderField: "User-Agent")
         request.httpBody = body.percentEncoded()
         
-        
+        DispatchQueue.main.async {
+            self.isLogining = true
+        }
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                self.isLogining = false
+            }
             guard let _ = data,
                 let response = response as? HTTPURLResponse,
                 error == nil else {                                              // check for fundamental networking error
@@ -54,10 +60,17 @@ class LoginViewModel:ObservableObject {
             let decoder = JSONDecoder()
             let json = try! decoder.decode(resJson.self,
                                            from: responseString!.data(using: .utf8)!)
-            // TODO: 处理登录失败的情况
-            if json.e == 403 {
 
+            if json.e == 403 {
+                loginSheet.loginFailed = true
                 return
+            }
+            
+            if json.e == 0 {
+                DispatchQueue.main.async {
+                    loginSheet.isUpdating.toggle()
+                    loginSheet.isLogined = true
+                }
             }
         }
         

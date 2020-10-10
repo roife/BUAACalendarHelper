@@ -71,7 +71,7 @@ public struct CalendarList<Content: View>: View {
     
     public var body: some View {
         if updatingVM.isUpdating {
-            ProgressView("正在获取课程表，可能需要一点时间...")
+            ProgressView("正在获取课程表 (\(updatingVM.cntFinished)/19)")
                 .progressViewStyle(CircularProgressViewStyle())
                 .onAppear() {
                     updatingVM.updateEvents()
@@ -163,7 +163,7 @@ public struct CalendarList<Content: View>: View {
                 Image(systemName: "arrow.2.circlepath").font(.title2)
             }
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("登陆"), message: Text("需要登录之后才能更新课表！"), dismissButton: .default(Text("Got it!")))
+                Alert(title: Text("登陆"), message: Text("需要登录之后才能更新课表！"), dismissButton: .default(Text("好")))
             }
             .padding(.trailing, 10)
             
