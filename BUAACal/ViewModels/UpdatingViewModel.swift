@@ -13,6 +13,7 @@ class UpdatingViewModel:ObservableObject {
     @Published var events: [Date:[CalendarEvent<CalendarEventDataModel>]] = [:]
     @Published var cntFinished:Int = 0
     
+    //MARK: JSON TYPE
     enum Weekday {
         case number(Int)
         case text(String)
@@ -26,7 +27,7 @@ class UpdatingViewModel:ObservableObject {
         let course_id: String
         let course_name: String
         let location: String
-//        let weekday: Weekday
+        //        let weekday: Weekday
         let lessons: String
         let teacher: String
         let week: String
@@ -68,6 +69,7 @@ class UpdatingViewModel:ObservableObject {
         let d: dataJson?
     }
     
+    // MARK:FUNCTIONS
     func updateEvents() {
         let cookieName = "eai-sess"
         guard let cookie = HTTPCookieStorage.shared.cookies?.first(where: { $0.name == cookieName })?.value else {
@@ -116,81 +118,94 @@ class UpdatingViewModel:ObservableObject {
                     return
                 }
                 
-                let responseString = String(data: data!, encoding: .utf8)
-                
-                let decoder = JSONDecoder()
-                var json: resJson?
-                do {
-                    json = try decoder.decode(resJson.self,
-                                               from: responseString!.data(using: .utf8)!)
-                } catch let error {
-                    print(error)
-                }
-                
-                guard let aJson = json else {
+                guard let aJson = decodeJson(data: data) else {
                     return
                 }
                 
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-                
-                if let days = aJson.d?.classes,
-                   let weekdays = aJson.d?.weekdays {
-                    for (index, day) in days.enumerated() {
-                        let c_n:[[eachClassJson]] = [day.c_1 ?? [],
-                                                     day.c_2 ?? [],
-                                                     day.c_3 ?? [],
-                                                     day.c_4 ?? [],
-                                                     day.c_5 ?? [],
-                                                     day.c_6 ?? [],
-                                                     day.c_7 ?? [],
-                                                     day.c_8 ?? [],
-                                                     day.c_9 ?? [],
-                                                     day.c_10 ?? [],
-                                                     day.c_11 ?? [],
-                                                     day.c_12 ?? [],
-                                                     day.c_13 ?? [],
-                                                     day.c_14 ?? []]
-                        for c_i in c_n {
-                            for course in c_i {
-                                let courseTime = course.course_time.split(separator: "~")
-                                
-                                if let startTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[0]),
-                                   let endTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[1]) {
-                                    let event = CalendarEvent(dateString: weekdays[index],
-                                                              data: CalendarEventDataModel(eventName: course.course_name,
-                                                                                           startTime: startTime,
-                                                                                           endTime: endTime,
-                                                                                           indicatorName: course.teacher,
-                                                                                           locationName: course.location,
-                                                                                           brightColorNumber: 01,
-                                                                                           darkColorNumber: 01))
-                                    let date = event.date
-                                    DispatchQueue.main.async {
-                                        if self.events[date] != nil {
-                                            if let duplicatedCourseIndex = self.events[event.date]?
-                                                .firstIndex(where: { $0.data.startTime == startTime  }) {
-                                                if ((self.events[date]?[duplicatedCourseIndex].data.indicatorName
-                                                        .split(separator: ",")
-                                                        .first(where: { $0 == course.teacher })) == nil) {
-                                                    self.events[date]?[duplicatedCourseIndex].data.indicatorName += "," + course.teacher
-                                                }
-                                            } else {
-                                                self.events[date]?.append(event)
-                                            }
-                                        } else {
-                                            self.events[date] = [event]
-                                        }
-                                    }
-                                    
-                                }
-                            }
-                        }
-                    }
+                guard let days = aJson.d?.classes,
+                      let weekdays = aJson.d?.weekdays else {
+                    return
                 }
+                
+                processCourse(days: days, weekdays: weekdays)
             }
             
             task.resume()
+        }
+    }
+    
+    func processCourse(days: [classJson], weekdays: [String]) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        for (index, day) in days.enumerated() {
+            let c_n:[[eachClassJson]] = [day.c_1 ?? [],
+                                         day.c_2 ?? [],
+                                         day.c_3 ?? [],
+                                         day.c_4 ?? [],
+                                         day.c_5 ?? [],
+                                         day.c_6 ?? [],
+                                         day.c_7 ?? [],
+                                         day.c_8 ?? [],
+                                         day.c_9 ?? [],
+                                         day.c_10 ?? [],
+                                         day.c_11 ?? [],
+                                         day.c_12 ?? [],
+                                         day.c_13 ?? [],
+                                         day.c_14 ?? []]
+            for c_i in c_n {
+                for course in c_i {
+                    let courseTime = course.course_time.split(separator: "~")
+                    
+                    guard let startTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[0]),
+                          let endTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[1]) else {
+                        continue
+                    }
+                    
+                    let courseData = CalendarEventDataModel(eventName: course.course_name,
+                                                            startTime: startTime,
+                                                            endTime: endTime,
+                                                            indicatorName: course.teacher,
+                                                            locationName: course.location,
+                                                            brightColorNumber: 01,
+                                                            darkColorNumber: 01)
+                    
+                    let event = CalendarEvent(dateString: weekdays[index],
+                                              data: courseData)
+                    
+                    DispatchQueue.main.async {
+                        let date = event.date
+                        
+                        if self.events[date] == nil {
+                            self.events[date] = [event]
+                        } else if let duplicatedCourseIndex = self.events[event.date]?
+                                    .firstIndex(where: { $0.data.startTime == startTime  }) {
+                            if ((self.events[date]?[duplicatedCourseIndex].data
+                                    .indicatorName
+                                    .split(separator: ",")
+                                    .first(where: { $0 == course.teacher })) == nil) {
+                                self.events[date]?[duplicatedCourseIndex].data.indicatorName += "," + course.teacher
+                            }
+                        } else {
+                            self.events[date]?.append(event)
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    func decodeJson(data: Data?) -> resJson? {
+        let responseString = String(data: data!, encoding: .utf8)
+        let decoder = JSONDecoder()
+        
+        do {
+            return try decoder.decode(resJson.self,
+                                      from: responseString!.data(using: .utf8)!)
+        } catch let error {
+            print(error)
+            return nil
         }
     }
 }

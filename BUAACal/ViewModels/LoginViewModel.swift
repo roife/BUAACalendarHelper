@@ -56,29 +56,36 @@ class LoginViewModel:ObservableObject {
             }
             
             let responseString = String(data: data!, encoding: .utf8)
+            guard let json = self.decodeLoginResJson(responseString: responseString) else {
+                return
+            }
             
-            let decoder = JSONDecoder()
-            do {
-                let json = try decoder.decode(resJson.self,
-                                               from: responseString!.data(using: .utf8)!)
-                
-                if json.e == 403 {
-                    loginSheet.loginFailed = true
-                    return
+            if json.e == 403 {
+                loginSheet.loginFailed = true
+                return
+            }
+            
+            if json.e == 0 {
+                DispatchQueue.main.async {
+                    loginSheet.isUpdating.toggle()
+                    loginSheet.isLogined = true
                 }
-                
-                if json.e == 0 {
-                    DispatchQueue.main.async {
-                        loginSheet.isUpdating.toggle()
-                        loginSheet.isLogined = true
-                    }
-                }
-            } catch let error {
-                print(error)
             }
         }
         
         task.resume()
+    }
+    
+    func decodeLoginResJson(responseString:String?) -> resJson? {
+        let decoder = JSONDecoder()
+        
+        do {
+            return try decoder.decode(resJson.self,
+                                         from: responseString!.data(using: .utf8)!)
+        } catch let error {
+            print(error)
+            return nil
+        }
     }
 }
 

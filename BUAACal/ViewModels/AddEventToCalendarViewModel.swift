@@ -22,21 +22,11 @@ class AddEventToCalendarViewModel:ObservableObject {
                 return
             }
             
-            self.removeExistedEvents();
-            
-            let newCalendar = EKCalendar(for: .event, eventStore: self.eventStore)
-            newCalendar.title = "BUAA Courses \(CalendarUtils.getCurrentYearString()) Term \(CalendarUtils.getCurrentTermString())"
-            newCalendar.source = self.eventStore.defaultCalendarForNewEvents?.source
-            do {
-                try self.eventStore.saveCalendar(newCalendar, commit:true)
-            } catch let error {
-                print(error)
-            }
+            let newCalendar = self.createNewCalendar();
             
             for (_, eachDayCourse) in courses {
                 for course in eachDayCourse {
                     let event:EKEvent = EKEvent(eventStore: self.eventStore)
-                    
                     event.title = course.data.eventName
                     event.startDate = course.data.startTime
                     event.endDate = course.data.endTime
@@ -44,15 +34,31 @@ class AddEventToCalendarViewModel:ObservableObject {
                     event.location = course.data.locationName
                     event.calendar = newCalendar
                     event.alarms = [EKAlarm(relativeOffset: -60*20)]
+                    
                     do {
                         try self.eventStore.save(event, span: .thisEvent)
-                    } catch let error as NSError {
+                    } catch let error {
                         print("failed to save event with error : \(error)")
                     }
                 }
             }
         }
         self.isFinished = true
+    }
+    
+    func createNewCalendar() -> EKCalendar {
+        self.removeExistedEvents();
+        
+        let newCalendar = EKCalendar(for: .event, eventStore: self.eventStore)
+        newCalendar.title = "BUAA Courses \(CalendarUtils.getCurrentYearString()) Term \(CalendarUtils.getCurrentTermString())"
+        newCalendar.source = self.eventStore.defaultCalendarForNewEvents?.source
+        do {
+            try self.eventStore.saveCalendar(newCalendar, commit:true)
+        } catch let error {
+            print(error)
+        }
+        
+        return newCalendar;
     }
     
     func removeExistedEvents() {
