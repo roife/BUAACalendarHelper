@@ -58,19 +58,23 @@ class LoginViewModel:ObservableObject {
             let responseString = String(data: data!, encoding: .utf8)
             
             let decoder = JSONDecoder()
-            let json = try! decoder.decode(resJson.self,
-                                           from: responseString!.data(using: .utf8)!)
-
-            if json.e == 403 {
-                loginSheet.loginFailed = true
-                return
-            }
-            
-            if json.e == 0 {
-                DispatchQueue.main.async {
-                    loginSheet.isUpdating.toggle()
-                    loginSheet.isLogined = true
+            do {
+                let json = try decoder.decode(resJson.self,
+                                               from: responseString!.data(using: .utf8)!)
+                
+                if json.e == 403 {
+                    loginSheet.loginFailed = true
+                    return
                 }
+                
+                if json.e == 0 {
+                    DispatchQueue.main.async {
+                        loginSheet.isUpdating.toggle()
+                        loginSheet.isLogined = true
+                    }
+                }
+            } catch let error {
+                print(error)
             }
         }
         

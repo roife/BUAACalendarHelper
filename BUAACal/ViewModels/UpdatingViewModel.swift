@@ -13,6 +13,12 @@ class UpdatingViewModel:ObservableObject {
     @Published var events: [Date:[CalendarEvent<CalendarEventDataModel>]] = [:]
     @Published var cntFinished:Int = 0
     
+    enum Weekday {
+        case number(Int)
+        case text(String)
+        case unsupported
+    }
+    
     struct eachClassJson:Codable {
         let id: String
         let year: String
@@ -20,7 +26,7 @@ class UpdatingViewModel:ObservableObject {
         let course_id: String
         let course_name: String
         let location: String
-        let weekday: String
+//        let weekday: Weekday
         let lessons: String
         let teacher: String
         let week: String
@@ -68,10 +74,6 @@ class UpdatingViewModel:ObservableObject {
             return
         }
         
-        let calendar = Calendar.current
-        let year = calendar.dateComponents([.year], from: Date()).year!
-        let month = calendar.dateComponents([.month], from: Date()).month!
-        
         let url = URL(string: "https://app.buaa.edu.cn/timetable/wap/default/get-datatmp")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
@@ -84,8 +86,8 @@ class UpdatingViewModel:ObservableObject {
         
         for week in 1...19 {
             let body: [String: Any] = [
-                "year": "\(year)-\(year+1)",
-                "term": month <= 7 ? "2" : "1",
+                "year": CalendarUtils.getCurrentYearString(),
+                "term": CalendarUtils.getCurrentTermString(),
                 "week": String(week),
                 "type": "2"
             ]
@@ -117,14 +119,23 @@ class UpdatingViewModel:ObservableObject {
                 let responseString = String(data: data!, encoding: .utf8)
                 
                 let decoder = JSONDecoder()
-                let json = try! decoder.decode(resJson.self,
+                var json: resJson?
+                do {
+                    json = try decoder.decode(resJson.self,
                                                from: responseString!.data(using: .utf8)!)
+                } catch let error {
+                    print(error)
+                }
+                
+                guard let aJson = json else {
+                    return
+                }
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
                 
-                if let days = json.d?.classes,
-                   let weekdays = json.d?.weekdays {
+                if let days = aJson.d?.classes,
+                   let weekdays = aJson.d?.weekdays {
                     for (index, day) in days.enumerated() {
                         let c_n:[[eachClassJson]] = [day.c_1 ?? [],
                                                      day.c_2 ?? [],
