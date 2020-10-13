@@ -9,10 +9,16 @@ import Foundation
 import SwiftUI
 
 public struct CalendarEventDataModel:Hashable {
+    let courseID: String
     let eventName: String
     let startTime: Date
     let endTime: Date
-    var indicatorName: String
+    let weeks: String
+    let courseType: String
+    let credit: Double
+    let examType: Int
+    let lessons: String
+    var indicatorName: String // Maybe modified
     let locationName: String
     let brightColorNumber: Int
     let darkColorNumber: Int

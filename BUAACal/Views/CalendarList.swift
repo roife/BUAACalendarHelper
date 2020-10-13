@@ -8,16 +8,6 @@
 
 import SwiftUI
 
-/// SwiftUI view to display paginated calendar months. When a given date is selected, all events for such date are represented below
-/// according to the view-generation initializer block.
-///
-/// Parameters to initialize:
-///   - initialDate: the initial month to be displayed will be extracted from this date. Defaults to the current day.
-///   - calendar: `Calendar` instance to be used thorought the `CalendarList` instance. Defaults to the current `Calendar`.
-///   - events: list of events to be displayed. Each event is an instance of `CalendarEvent`.
-///   - selectedDateColor: color used to highlight the selected day. Defaults to the accent color.
-///   - todayDateColor: color used to highlight the current day. Defaults to the accent color with 0.3 opacity.
-///   - viewForEvent: `@ViewBuilder` block to generate a view per every event on the selected date. All the generated views for a given day will be presented in a `List`.
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct CalendarList<Content: View>: View {
     @State private var months:[CalendarMonth]
@@ -28,7 +18,9 @@ public struct CalendarList<Content: View>: View {
     @State public var isLogined = false
     @State public var isLoginSheetPresented = false
     @State public var showAlert = false
-    //    @State public var isUpdating = false
+    @State public var showModal = false
+//    @State public var isUpdating = false
+    @State private var currentSelectEventData:CalendarEventDataModel?
     
     @ObservedObject var updatingVM = UpdatingViewModel()
     @ObservedObject var addEventVM = AddEventToCalendarViewModel()
@@ -38,19 +30,13 @@ public struct CalendarList<Content: View>: View {
     
     //    private var events:[Date:[CalendarEvent<T>]]
     
+//    private var currentSelectEventData:CalendarEventDataModel
+    
     private var viewForEventBlock:(CalendarEvent<CalendarEventDataModel>) -> Content
     
     private var selectedDateColor:Color
     private var todayDateColor:Color
     
-    /// Create a new paginated calendar SwiftUI view.
-    /// - Parameters:
-    ///   - initialDate: the initial month to be displayed will be extracted from this date. Defaults to the current day.
-    ///   - calendar: `Calendar` instance to be used thorought the `CalendarList` instance. Defaults to the current `Calendar`.
-    ///   - events: list of events to be displayed. Each event is an instance of `CalendarEvent`.
-    ///   - selectedDateColor: color used to highlight the selected day. Defaults to the accent color.
-    ///   - todayDateColor: color used to highlight the current day. Defaults to the accent color with 0.3 opacity.
-    ///   - viewForEvent: `@ViewBuilder` block to generate a view per every event on the selected date. All the generated views for a given day will be presented in a `List`.
     public init(initialDate:Date = Date(),
                 calendar:Calendar = Calendar.current,
                 events:[CalendarEvent<CalendarEventDataModel>],
@@ -70,17 +56,25 @@ public struct CalendarList<Content: View>: View {
     }
     
     public var body: some View {
-        if updatingVM.isUpdating {
-            ProgressView("正在获取课程表 (\(updatingVM.cntFinished)/19)")
-                .progressViewStyle(CircularProgressViewStyle())
-                .onAppear() {
-                    updatingVM.updateEvents()
+        ZStack {
+            if updatingVM.isUpdating {
+                ProgressView("正在获取课程表 (\(updatingVM.cntFinished)/19)")
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .onAppear() {
+                        updatingVM.updateEvents()
+                    }
+            } else {
+                NavigationView {
+                    commonBody
+                        .navigationBarTitle("\(self.months[self.currentPage].monthTitle())", displayMode: .inline)
+                        .navigationBarItems(leading: leadingButtons(), trailing: trailingButtons())
                 }
-        } else {
-            NavigationView {
-                commonBody
-                    .navigationBarTitle("\(self.months[self.currentPage].monthTitle())", displayMode: .inline)
-                    .navigationBarItems(leading: leadingButtons(), trailing: trailingButtons())
+                .blur(radius: showModal ? 15 : 0)
+            }
+            
+            if showModal {
+                EventCardDetailModal(showModal: self.$showModal,
+                                     data: self.currentSelectEventData!)
             }
         }
     }
@@ -111,6 +105,12 @@ public struct CalendarList<Content: View>: View {
             List {
                 ForEach(eventsForSelectedDate(), id:\.data) { event in
                     self.viewForEventBlock(event)
+                        .onTapGesture {
+                            withAnimation {
+                                self.showModal.toggle()
+                                self.currentSelectEventData = event.data
+                            }
+                        }
                 }
             }
             .listStyle(PlainListStyle())

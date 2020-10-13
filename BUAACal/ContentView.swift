@@ -9,22 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     var events:[CalendarEvent<CalendarEventDataModel>] = [
-            CalendarEvent(dateString: "2020-10-04",
-                          data: CalendarEventDataModel(eventName: "如何爬爬",
+            CalendarEvent(dateString: "2020-10-13",
+                          data: CalendarEventDataModel(courseID: "BH380948",
+                                                       eventName: "课程名",
                                                        startTime: Date(),
                                                        endTime: Date(),
-                                                       indicatorName: "吴家焱",
-                                                       locationName: "543",
-                                                       brightColorNumber: 0,
-                                                       darkColorNumber: 0)),
-            CalendarEvent(dateString: "2020-10-09",
-                          data: CalendarEventDataModel(eventName: "如何膜佬",
-                                                       startTime: Date(),
-                                                       endTime: Date(),
-                                                       indicatorName: "吴家焱",
-                                                       locationName: "543",
-                                                       brightColorNumber: 1,
-                                                       darkColorNumber: 1))
+                                                       weeks: "1, 2, 3, 4",
+                                                       courseType: "必修",
+                                                       credit: 2.3,
+                                                       examType: 1,
+                                                       lessons: "0203",
+                                                       indicatorName: "我",
+                                                       locationName: "地点",
+                                                       brightColorNumber: 01,
+                                                       darkColorNumber: 01))
         ]
         
         var body: some View {

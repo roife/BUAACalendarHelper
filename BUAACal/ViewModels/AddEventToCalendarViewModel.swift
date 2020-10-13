@@ -30,7 +30,16 @@ class AddEventToCalendarViewModel:ObservableObject {
                     event.title = course.data.eventName
                     event.startDate = course.data.startTime
                     event.endDate = course.data.endTime
-                    event.notes = course.data.indicatorName
+                    event.notes = """
+                        编号：\(course.data.courseID)
+                        名称：\(course.data.eventName)
+                        教师：\(course.data.indicatorName)
+                        学分：\(course.data.credit)
+                        类型：\(course.data.courseType)
+                        上课星期：\(course.data.weeks)
+                        上课时间：\(course.data.getStartTimeAsString) ~ \(course.data.getEndTimeAsString)；第 \(course.data.lessons.separate(every: 2, with: ",")) 节课
+                        考查方式：\(course.data.examType)
+                        """
                     event.location = course.data.locationName
                     event.calendar = newCalendar
                     event.alarms = [EKAlarm(relativeOffset: -60*20)]
@@ -74,5 +83,11 @@ class AddEventToCalendarViewModel:ObservableObject {
                 }
             }
         }
+    }
+}
+
+extension String {
+    func separate(every stride: Int = 4, with separator: Character = " ") -> String {
+        return String(enumerated().map { $0 > 0 && $0 % stride == 0 ? [separator, $1] : [$1]}.joined())
     }
 }

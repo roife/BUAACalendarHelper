@@ -24,6 +24,7 @@
 		3208658325289A7900B169D3 /* EventCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208658225289A7900B169D3 /* EventCard.swift */; };
 		320865902528A03100B169D3 /* CalendarEventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3208658F2528A03100B169D3 /* CalendarEventDataModel.swift */; };
 		328AA83C2530DC6E00A3B765 /* AddEventToCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AA83B2530DC6E00A3B765 /* AddEventToCalendarViewModel.swift */; };
+		329BE22E2535AFE300FD14E5 /* EventCardDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329BE22D2535AFE300FD14E5 /* EventCardDetailModal.swift */; };
 		32A2B8C025290F110025BDCD /* UpdatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A2B8BF25290F110025BDCD /* UpdatingViewModel.swift */; };
 		32C86C5B2528B7B8003E73D5 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */; };
 		32C86C632528E031003E73D5 /* LoginSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C622528E031003E73D5 /* LoginSheet.swift */; };
@@ -71,6 +72,7 @@
 		3208658225289A7900B169D3 /* EventCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCard.swift; sourceTree = "<group>"; };
 		3208658F2528A03100B169D3 /* CalendarEventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventDataModel.swift; sourceTree = "<group>"; };
 		328AA83B2530DC6E00A3B765 /* AddEventToCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventToCalendarViewModel.swift; sourceTree = "<group>"; };
+		329BE22D2535AFE300FD14E5 /* EventCardDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardDetailModal.swift; sourceTree = "<group>"; };
 		32A2B8BF25290F110025BDCD /* UpdatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatingViewModel.swift; sourceTree = "<group>"; };
 		32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		32C86C622528E031003E73D5 /* LoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheet.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				3208658225289A7900B169D3 /* EventCard.swift */,
+				329BE22D2535AFE300FD14E5 /* EventCardDetailModal.swift */,
 			);
 			path = EventCard;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				320865902528A03100B169D3 /* CalendarEventDataModel.swift in Sources */,
 				3208651A2528836900B169D3 /* ContentView.swift in Sources */,
 				32C86C5B2528B7B8003E73D5 /* ExtensionColor.swift in Sources */,
+				329BE22E2535AFE300FD14E5 /* EventCardDetailModal.swift in Sources */,
 				32C86C6C2528E1AA003E73D5 /* LoginViewModel.swift in Sources */,
 				320865562528838400B169D3 /* CalendarViewDay.swift in Sources */,
 				320865512528838400B169D3 /* PagerView.swift in Sources */,

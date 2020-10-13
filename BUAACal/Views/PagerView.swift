@@ -10,13 +10,6 @@
 
 import SwiftUI
 
-/// SwiftUI view that displays contained children in pages, like a  `UIPageViewController` in UIKit.
-///
-/// Parameters to initialize:
-///   - pageCount: number of pages.
-///   - currentIndex: binding fo current page.
-///   - pageChanged: block to be called whenever a new page is displayed.
-///   - content: `@ViewBuilder` block to generate all children pages.
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 struct PagerView<Content: View>: View {
     let pageCount: Int
@@ -27,12 +20,6 @@ struct PagerView<Content: View>: View {
     
     var pageChanged: ((Int) -> ())? = nil
     
-    /// Creates a new `PagerView` to display paginated, scrolling views.
-    /// - Parameters:
-    ///   - pageCount: number of pages.
-    ///   - currentIndex: binding fo current page.
-    ///   - pageChanged: block to be called whenever a new page is displayed.
-    ///   - content: `@ViewBuilder` block to generate all children pages.
     init(pageCount: Int, currentIndex: Binding<Int>, pageChanged: ((Int) -> ())? = nil, @ViewBuilder content: () -> Content) {
         
         self.pageCount = pageCount

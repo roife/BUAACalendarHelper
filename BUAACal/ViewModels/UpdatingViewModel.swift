@@ -153,6 +153,8 @@ class UpdatingViewModel:ObservableObject {
                                          day.c_12 ?? [],
                                          day.c_13 ?? [],
                                          day.c_14 ?? []]
+            var colori = 01
+            
             for c_i in c_n {
                 for course in c_i {
                     let courseTime = course.course_time.split(separator: "~")
@@ -162,16 +164,24 @@ class UpdatingViewModel:ObservableObject {
                         continue
                     }
                     
-                    let courseData = CalendarEventDataModel(eventName: course.course_name,
+                    let courseData = CalendarEventDataModel(courseID: course.course_id,
+                                                            eventName: course.course_name,
                                                             startTime: startTime,
                                                             endTime: endTime,
+                                                            weeks: course.week,
+                                                            courseType: course.course_type,
+                                                            credit: Double(course.credit)!,
+                                                            examType: Int(course.khfs)!,
+                                                            lessons: course.lessons,
                                                             indicatorName: course.teacher,
                                                             locationName: course.location,
-                                                            brightColorNumber: 01,
-                                                            darkColorNumber: 01)
+                                                            brightColorNumber: colori,
+                                                            darkColorNumber: colori)
                     
                     let event = CalendarEvent(dateString: weekdays[index],
                                               data: courseData)
+                    
+                    colori = (colori + 1) % colorNumbers.count + 1
                     
                     DispatchQueue.main.async {
                         let date = event.date
