@@ -148,6 +148,9 @@ public struct CalendarList<Content: View>: View {
         }) {
             Image(systemName: "calendar.badge.plus").font(.title2)
         }
+        .alert(isPresented: $addEventVM.isFinished) {
+            Alert(title: Text("添加成功"), message: Text("成功将课程同步到系统日历！"), dismissButton: .default(Text("好")))
+        }
     }
     
     func trailingButtons() -> some View {
