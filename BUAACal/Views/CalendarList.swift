@@ -19,7 +19,7 @@ public struct CalendarList<Content: View>: View {
     @State public var isLoginSheetPresented = false
     @State public var showAlert = false
     @State public var showModal = false
-//    @State public var isUpdating = false
+
     @State private var currentSelectEventData:CalendarEventDataModel?
     
     @ObservedObject var updatingVM = UpdatingViewModel()
@@ -90,6 +90,7 @@ public struct CalendarList<Content: View>: View {
                             CalendarMonthView(month: month,
                                               calendar: self.months[1].calendar,
                                               selectedDate: self.$selectedDate,
+                                              showModal: self.$showModal,
                                               calendarDayHeight: self.calendarDayHeight,
                                               eventsForDate: updatingVM.events,
                                               selectedDateColor: self.selectedDateColor,
@@ -142,6 +143,9 @@ public struct CalendarList<Content: View>: View {
     
     func leadingButtons() -> some View {
         Button(action: {
+            guard !showModal else {
+                return
+            }
             withAnimation {
                 self.addEventVM.addEventToCalendar(courses: updatingVM.events)
             }
@@ -156,6 +160,9 @@ public struct CalendarList<Content: View>: View {
     func trailingButtons() -> some View {
         HStack {
             Button(action: {
+                guard !showModal else {
+                    return
+                }
                 if isLogined {
                     updatingVM.isUpdating = true
                     updatingVM.updateEvents()
@@ -171,6 +178,9 @@ public struct CalendarList<Content: View>: View {
             .padding(.trailing, 10)
             
             Button(action: {
+                guard !showModal else {
+                    return
+                }
                 self.isLoginSheetPresented.toggle()
             }) {
                 Image(systemName: "person.crop.circle").font(.title2)

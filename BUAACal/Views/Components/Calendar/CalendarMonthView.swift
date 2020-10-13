@@ -14,6 +14,7 @@ struct CalendarMonthView<T:Hashable>: View {
     let calendar:Calendar
     
     @Binding var selectedDate:Date
+    @Binding var showModal:Bool
     
     let calendarDayHeight:CGFloat
     
@@ -48,6 +49,10 @@ struct CalendarMonthView<T:Hashable>: View {
                                             selectedDateColor: self.selectedDateColor,
                                             todayDateColor: self.todayDateColor)
                                 .onTapGesture {
+                                    guard !showModal else {
+                                        return
+                                    }
+                                    
                                     self.selectedDate = day
                                 }
                         }

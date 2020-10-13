@@ -14,11 +14,11 @@ class UpdatingViewModel:ObservableObject {
     @Published var cntFinished:Int = 0
     
     //MARK: JSON TYPE
-    enum Weekday {
-        case number(Int)
-        case text(String)
-        case unsupported
-    }
+//    enum Weekday {
+//        case number(Int)
+//        case text(String)
+//        case unsupported
+//    }
     
     struct eachClassJson:Codable {
         let id: String
@@ -111,7 +111,7 @@ class UpdatingViewModel:ObservableObject {
                     print("error", error ?? "Unknown error")
                     return
                 }
-                
+                print(response.statusCode)
                 guard (200 ... 299) ~= response.statusCode else {                    // check for http errors
                     print("statusCode should be 2xx, but is \(response.statusCode)")
                     print("response = \(response)")
