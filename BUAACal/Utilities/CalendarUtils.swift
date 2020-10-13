@@ -62,4 +62,16 @@ public struct CalendarUtils {
                              actualDate: newDate,
                              weeks: grouped)
     }
+    
+    public static func getCurrentYearString() -> String {
+        let calendar = Calendar.current
+        let year = calendar.dateComponents([.year], from: Date()).year!
+        return "\(year)-\(year+1)"
+    }
+    
+    public static func getCurrentTermString() -> String {
+        let calendar = Calendar.current
+        let month = calendar.dateComponents([.month], from: Date()).month!
+        return "\(month <= 7 ? "2" : "1")"
+    }
 }
