@@ -36,6 +36,7 @@ class AddEventToCalendarViewModel:ObservableObject {
                         教师：\(course.data.indicatorName)
                         学分：\(course.data.credit)
                         类型：\(course.data.courseType)
+                        课时：\(course.data.courseHour)
                         上课星期：\(course.data.weeks)
                         上课时间：\(course.data.getStartTimeAsString) ~ \(course.data.getEndTimeAsString)；第 \(course.data.lessons.separate(every: 2, with: ",")) 节课
                         考查方式：\(course.data.examType)

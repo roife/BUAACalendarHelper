@@ -43,35 +43,42 @@ struct EventCardDetailModal: View {
                             .padding([.trailing], 0)
                             .padding(.bottom, 3)
                         
-                        Text("教师：\(data.indicatorName)")
-                            .font(.system(size: 17,
-                                          design: .rounded))
-                            .padding(.bottom, 1)
-                        
-                        Text("学分：\(String(format: "%.2f", data.credit))")
-                            .font(.system(size: 17,
-                                          design: .rounded))
-                            .padding(.bottom, 1)
-                        
-                        Text("类型：\(data.courseType)")
-                            .font(.system(size: 17,
-                                          design: .rounded))
-                            .padding(.bottom, 1)
-                        
-                        Text("时间：第 \(data.lessons.separate(every: 2, with: ",")) 节")
-                            .font(.system(size: 17,
-                                          design: .rounded))
-                            .padding(.bottom, 1)
-                        
-                        Text("上课星期：\(data.weeks)")
-                            .font(.system(size: 17,
-                                          design: .rounded))
-                            .padding(.bottom, 1)
-                        
-                        Text("考查方式：\(data.examType)")
-                            .font(.system(size: 17,
-                                          design: .rounded))
-                            .padding(.bottom, 1)
+                        VStack(alignment: .leading) {
+                            Text("教师：\(data.indicatorName)")
+                                .font(.system(size: 17,
+                                              design: .rounded))
+                                .padding(.bottom, 1)
+                            
+                            Text("学分：\(String(format: "%.2f", data.credit))")
+                                .font(.system(size: 17,
+                                              design: .rounded))
+                                .padding(.bottom, 1)
+                            
+                            Text("类型：\(data.courseType)")
+                                .font(.system(size: 17,
+                                              design: .rounded))
+                                .padding(.bottom, 1)
+                            
+                            Text("时间：第 \(data.lessons.separate(every: 2, with: ",")) 节")
+                                .font(.system(size: 17,
+                                              design: .rounded))
+                                .padding(.bottom, 1)
+                            
+                            Text("课时：\(data.courseHour) 小时")
+                                .font(.system(size: 17,
+                                              design: .rounded))
+                                .padding(.bottom, 1)
+                            
+                            Text("上课星期：\(data.weeks)")
+                                .font(.system(size: 17,
+                                              design: .rounded))
+                                .padding(.bottom, 1)
+                            
+                            Text("考查方式：\(data.examType)")
+                                .font(.system(size: 17,
+                                              design: .rounded))
+                                .padding(.bottom, 1)
+                        }
                         
                     }
                     Spacer()

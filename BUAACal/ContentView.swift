@@ -21,6 +21,7 @@ struct ContentView: View {
                                                        lessons: "0203",
                                                        indicatorName: "我",
                                                        locationName: "地点",
+                                                       courseHour: "16",
                                                        brightColorNumber: 01,
                                                        darkColorNumber: 01))
         ]

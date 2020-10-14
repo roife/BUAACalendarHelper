@@ -50,21 +50,21 @@ public enum EventCardColor: Int {
 }
 
 public let colorNumbers: [Color] = [
-    Color(UIColor(hexString: "#DFE6E5")),
-    Color(UIColor(hexString: "#D4F0D3")),
-    Color(UIColor(hexString: "#E8D497")),
-    Color(UIColor(hexString: "#EDCB64")),
-    Color(UIColor(hexString: "#E2E2B6")),
-    Color(UIColor(hexString: "#F1F2C6")),
-    Color(UIColor(hexString: "#CC99BE")),
-    Color(UIColor(hexString: "#F2FFF3"))
+    Color(UIColor(hexString: "#6A755C")),
+    Color(UIColor(hexString: "#9790A4")),
+    Color(UIColor(hexString: "#6E798C")),
+    Color(UIColor(hexString: "#87544A")),
+    Color(UIColor(hexString: "#3C6869")),
+    Color(UIColor(hexString: "#25556B")),
+    Color(UIColor(hexString: "#6080A0")),
+    Color(UIColor(hexString: "#948365"))
 ]
 
 public let colorNumbersLight: [Color] = [
     Color(UIColor(hexString: "#93CA76")),
-    Color(UIColor(hexString: "#A0D8EF")),
-    Color(UIColor(hexString: "#FDDEA5")),
-    Color(UIColor(hexString: "#D3CCD6")),
+    Color(UIColor(hexString: "#4A488E")),
+    Color(UIColor(hexString: "#6E798C")),
+    Color(UIColor(hexString: "#25556B")),
     Color(UIColor(hexString: "#E4AB9B")),
     Color(UIColor(hexString: "#DBD0E6")),
     Color(UIColor(hexString: "#DCDDDD")),

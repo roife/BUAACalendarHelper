@@ -189,6 +189,7 @@ class UpdatingViewModel:ObservableObject {
                                                             lessons: course.lessons,
                                                             indicatorName: course.teacher,
                                                             locationName: course.location,
+                                                            courseHour: course.course_hour,
                                                             brightColorNumber: 01,
                                                             darkColorNumber: 0)
                     

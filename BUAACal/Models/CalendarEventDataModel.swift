@@ -20,6 +20,7 @@ public struct CalendarEventDataModel:Hashable {
     let lessons: String
     var indicatorName: String // Maybe modified
     let locationName: String
+    let courseHour: String
     var brightColorNumber: Int
     var darkColorNumber: Int
     
