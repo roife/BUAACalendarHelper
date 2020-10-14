@@ -62,9 +62,9 @@ public let colorNumbers: [Color] = [
 
 public let colorNumbersLight: [Color] = [
     Color(UIColor(hexString: "#93CA76")),
-    Color(UIColor(hexString: "#4A488E")),
-    Color(UIColor(hexString: "#6E798C")),
-    Color(UIColor(hexString: "#25556B")),
+    Color(UIColor(hexString: "#A69ABD")),
+    Color(UIColor(hexString: "#C1D8AC")),
+    Color(UIColor(hexString: "#A0CED8")),
     Color(UIColor(hexString: "#E4AB9B")),
     Color(UIColor(hexString: "#DBD0E6")),
     Color(UIColor(hexString: "#DCDDDD")),

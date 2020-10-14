@@ -114,7 +114,7 @@ class UpdatingViewModel:ObservableObject {
                     print("error", error ?? "Unknown error")
                     return
                 }
-                print(response.statusCode)
+
                 guard (200 ... 299) ~= response.statusCode else {                    // check for http errors
                     print("statusCode should be 2xx, but is \(response.statusCode)")
                     print("response = \(response)")
@@ -171,7 +171,11 @@ class UpdatingViewModel:ObservableObject {
             
             for c_i in c_n {
                 for course in c_i {
-                    let courseTime = course.course_time.split(separator: "~")
+                    var courseTime = course.course_time.split(separator: "~")
+                    
+                    if courseTime.isEmpty {
+                        courseTime = ["20:40", "22:15"]
+                    }
                     
                     guard let startTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[0]),
                           let endTime = dateFormatter.date(from: weekdays[index] + " " + courseTime[1]) else {

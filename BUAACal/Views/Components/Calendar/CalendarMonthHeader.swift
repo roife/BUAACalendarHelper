@@ -16,6 +16,8 @@ struct CalendarMonthHeader:View {
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
+                Spacer()
+                
                 HStack(spacing: 0) {
                     Spacer()
                     ForEach(CalendarUtils.weekdays, id:\.self) { weekday in

@@ -99,15 +99,20 @@ struct EventCardDetailModal: View {
                         showModal.toggle()
                     }
                 } label: {
+                    Spacer()
+                    
                     Text("完成")
-                        .frame(minWidth: 0, maxWidth: .infinity)
+                    
+                    Spacer()
                 }
                 .padding(15)
                 .background(colorScheme == .light ? colorNumbersLight[data.brightColorNumber] : colorNumbers[data.darkColorNumber])
                 .cornerRadius(45)
                 .frame(minWidth: 0, maxWidth: .infinity)
-                .shadow(radius: 10)
+                .shadow(radius: 1)
             }
+            .padding([.leading], 5)
+            .padding([.trailing], 5)
         }
     }
 }
