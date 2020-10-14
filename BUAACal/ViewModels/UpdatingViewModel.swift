@@ -12,6 +12,7 @@ class UpdatingViewModel:ObservableObject {
     @Published var isUpdating: Bool = false
     @Published var events: [Date:[CalendarEvent<CalendarEventDataModel>]] = [:]
     @Published var cntFinished:Int = 0
+    private var courseIdSet:Set<String> = []
     
     //MARK: JSON TYPE
 //    enum Weekday {
@@ -85,6 +86,7 @@ class UpdatingViewModel:ObservableObject {
         
         cntFinished = 0;
         self.events = [:]
+        courseIdSet = []
         
         for week in 1...19 {
             let body: [String: Any] = [
@@ -100,6 +102,7 @@ class UpdatingViewModel:ObservableObject {
                 DispatchQueue.main.async {
                     cntFinished += 1
                     if cntFinished == 19 {
+                        setColors()
                         self.isUpdating.toggle()
                     }
                     print(cntFinished)
@@ -134,6 +137,18 @@ class UpdatingViewModel:ObservableObject {
         }
     }
     
+    func setColors() {
+        let courseIdArr = Array(courseIdSet)
+        
+        for (date, courseArr) in events {
+            for (index, course) in courseArr.enumerated() {
+                self.events[date]![index]
+                    .data.setColor(brightColor: (courseIdArr.firstIndex(of: course.data.courseID) ?? 01) % colorNumbersLight.count,
+                                                  darkColor: (courseIdArr.firstIndex(of: course.data.courseID) ?? 01) % colorNumbers.count)
+            }
+        }
+    }
+    
     func processCourse(days: [classJson], weekdays: [String]) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
@@ -153,7 +168,6 @@ class UpdatingViewModel:ObservableObject {
                                          day.c_12 ?? [],
                                          day.c_13 ?? [],
                                          day.c_14 ?? []]
-            var colori = 01
             
             for c_i in c_n {
                 for course in c_i {
@@ -175,13 +189,13 @@ class UpdatingViewModel:ObservableObject {
                                                             lessons: course.lessons,
                                                             indicatorName: course.teacher,
                                                             locationName: course.location,
-                                                            brightColorNumber: colori,
-                                                            darkColorNumber: colori)
+                                                            brightColorNumber: 01,
+                                                            darkColorNumber: 0)
                     
                     let event = CalendarEvent(dateString: weekdays[index],
                                               data: courseData)
                     
-                    colori = (colori + 1) % colorNumbers.count + 1
+                    courseIdSet.insert(course.course_id)
                     
                     DispatchQueue.main.async {
                         let date = event.date

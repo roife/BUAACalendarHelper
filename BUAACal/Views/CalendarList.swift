@@ -69,7 +69,7 @@ public struct CalendarList<Content: View>: View {
                         .navigationBarTitle("\(self.months[self.currentPage].monthTitle())", displayMode: .inline)
                         .navigationBarItems(leading: leadingButtons(), trailing: trailingButtons())
                 }
-                .blur(radius: showModal ? 15 : 0)
+                .blur(radius: showModal ? 20 : 0)
             }
             
             if showModal {

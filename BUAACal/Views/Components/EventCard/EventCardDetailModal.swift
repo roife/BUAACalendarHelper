@@ -23,7 +23,7 @@ struct EventCardDetailModal: View {
                             .font(.system(size: 28,
                                           weight: .bold,
                                           design: .rounded))
-//                            .padding(.bottom, 1)
+                            .padding(.top, 3)
                         
                         Text(data.courseID)
                             .font(.system(size: 16,
@@ -77,7 +77,9 @@ struct EventCardDetailModal: View {
                     Spacer()
                 }
                 .padding(15)
-                .background(colorScheme == .light ? colorNumbersLight[data.brightColorNumber] : colorNumbers[data.darkColorNumber])
+                .background(colorScheme == .light
+                                ? colorNumbersLight[data.brightColorNumber]
+                                : colorNumbers[data.darkColorNumber])
                 .cornerRadius(15)
                 .shadow(radius: 10)
                 

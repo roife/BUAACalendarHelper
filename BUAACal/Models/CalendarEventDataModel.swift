@@ -20,8 +20,8 @@ public struct CalendarEventDataModel:Hashable {
     let lessons: String
     var indicatorName: String // Maybe modified
     let locationName: String
-    let brightColorNumber: Int
-    let darkColorNumber: Int
+    var brightColorNumber: Int
+    var darkColorNumber: Int
     
     var getStartTimeAsString: String {
         let dateFormmter = DateFormatter()
@@ -33,5 +33,10 @@ public struct CalendarEventDataModel:Hashable {
         let dateFormmter = DateFormatter()
         dateFormmter.dateFormat = "HH:mm"
         return "\(dateFormmter.string(from: endTime))"
+    }
+    
+    mutating func setColor(brightColor: Int, darkColor: Int) {
+        self.brightColorNumber = brightColor
+        self.darkColorNumber = darkColor
     }
 }
