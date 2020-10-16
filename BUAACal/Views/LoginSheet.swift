@@ -14,6 +14,7 @@ struct LoginSheet: View {
     @ObservedObject var loginVM = LoginViewModel()
     
     @State var loginFailed:Bool = false
+    @State var showReloginAlert:Bool = false
     
     var body: some View {
         if loginVM.isLogining {
@@ -36,11 +37,21 @@ struct LoginSheet: View {
                             .autocapitalization(.none)
                         SecureField("密码", text: $loginVM.password)
                     }
-                    Section {
+                    Section() {
                         Button ("登录并更新") {
-                            loginVM.login(loginSheet: self)
+                            if isLogined {
+                                showReloginAlert = true
+                            } else {
+                                loginVM.login(loginSheet: self)
+                            }
                         }
                         .disabled(loginVM.email.isEmpty || loginVM.password.isEmpty)
+                        .alert(isPresented: $showReloginAlert) {
+                            Alert(title: Text("登录提醒"),
+                                  message: Text("检测到您已经登录账号，是否切换用户？"),
+                                  primaryButton: .destructive(Text("确定")) { loginVM.login(loginSheet: self) },
+                                  secondaryButton: .cancel(Text("取消")))
+                        }
                     }
                 }
                 .navigationBarTitle(Text("登录"), displayMode: .inline)
