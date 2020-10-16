@@ -30,11 +30,11 @@ struct PagerView<Content: View>: View {
     
     var body: some View {
         GeometryReader { geometry in
-            HStack(alignment: .center , spacing: 0) {
+            HStack(alignment: .center, spacing: 0) {
                 self.content.frame(width: geometry.size.width)
                 //, alignment: .topLeading)
             }
-        
+            
             .frame(width: geometry.size.width, alignment: .leading)
             .offset(x: -CGFloat(self.currentIndex) * geometry.size.width)
             .offset(x: self.translation)
@@ -53,7 +53,7 @@ struct PagerView<Content: View>: View {
                     if oldIndex != self.currentIndex, let pageChanged = self.pageChanged {
                         pageChanged(self.currentIndex)
                     }
-                
+                    
                 }
             )
         }

@@ -8,19 +8,19 @@
 import Foundation
 
 public struct CalendarMonth {
-    public var calendar:Calendar
-    public var actualDate:Date
+    public var calendar: Calendar
+    public var actualDate: Date
     
-    public var year:Int
-    public var month:Int
+    public var year: Int
+    public var month: Int
     
-    public var key:String {
+    public var key: String {
         "\(year)-\(month)"
     }
     
-    public var weeks:[[Date]]
+    public var weeks: [[Date]]
     
-    public init(calendar:Calendar, actualDate:Date, weeks:[[Date]]) {
+    public init(calendar: Calendar, actualDate: Date, weeks: [[Date]]) {
         self.calendar = calendar
         self.actualDate = actualDate
         self.weeks = weeks
@@ -39,7 +39,7 @@ public struct CalendarMonth {
     }
     
     public func getSurroundingMonths() -> [CalendarMonth] {
-        return [
+        [
             self.previousMonth(),
             CalendarMonth(calendar: self.calendar, actualDate: self.actualDate, weeks: self.weeks),
             self.nextMonth()
@@ -53,10 +53,10 @@ public struct CalendarMonth {
     }
     
     public func monthTitle() -> String {
-        return "\(monthName()) \(year)"
+        "\(monthName()) \(year)"
     }
     
-    public static func getSurroundingMonths(forDate date:Date, andCalendar calendar:Calendar) -> [CalendarMonth] {
+    public static func getSurroundingMonths(forDate date: Date, andCalendar calendar: Calendar) -> [CalendarMonth] {
         let calendarMonth = CalendarUtils.getCalendarMonthFor(date: date, calendar: calendar)
         return [
             calendarMonth.previousMonth(),

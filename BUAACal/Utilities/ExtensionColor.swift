@@ -21,32 +21,21 @@ extension UIColor {
         let r = Int(color >> 16) & mask
         let g = Int(color >> 8) & mask
         let b = Int(color) & mask
-        let red   = CGFloat(r) / 255.0
+        let red = CGFloat(r) / 255.0
         let green = CGFloat(g) / 255.0
-        let blue  = CGFloat(b) / 255.0
-        self.init(red:red, green:green, blue:blue, alpha:alpha)
+        let blue = CGFloat(b) / 255.0
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
+    
     func toHexString() -> String {
-        var r:CGFloat = 0
-        var g:CGFloat = 0
-        var b:CGFloat = 0
-        var a:CGFloat = 0
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
         getRed(&r, green: &g, blue: &b, alpha: &a)
-        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
-        return String(format:"#%06x", rgb)
+        let rgb: Int = (Int)(r * 255) << 16 | (Int)(g * 255) << 8 | (Int)(b * 255) << 0
+        return String(format: "#%06x", rgb)
     }
-}
-
-
-public enum EventCardColor: Int {
-    case purplePunch = 0
-    case tangyOrange
-    case placidGreen
-    case brightYellow
-    case trendyTeal
-    case gleamyPink
-    case beamingBlue
-    case vanillaIce
 }
 
 public let colorNumbers: [Color] = [

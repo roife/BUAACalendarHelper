@@ -9,12 +9,12 @@ import SwiftUI
 
 struct EventCard: View {
     @Environment(\.colorScheme) var colorScheme
-    let data:CalendarEventDataModel
+    let data: CalendarEventDataModel
     
     var body: some View {
         VStack {
             HStack(alignment: .top) {
-                VStack(alignment: .leading){
+                VStack(alignment: .leading) {
                     Text(data.eventName)
                         .font(.system(size: 22,
                                       weight: .bold,
@@ -44,6 +44,5 @@ struct EventCard: View {
         .padding(15)
         .background(colorScheme == .light ? colorNumbersLight[data.brightColorNumber] : colorNumbers[data.darkColorNumber])
         .cornerRadius(15)
-        //        .padding(.bottom)
     }
 }

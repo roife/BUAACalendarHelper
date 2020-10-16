@@ -9,8 +9,8 @@ import SwiftUI
 
 struct EventCardDetailModal: View {
     @Environment(\.colorScheme) var colorScheme
-    @Binding var showModal:Bool
-    let data:CalendarEventDataModel
+    @Binding var showModal: Bool
+    let data: CalendarEventDataModel
     
     var body: some View {
         VStack {
@@ -18,7 +18,7 @@ struct EventCardDetailModal: View {
                 Spacer()
                 
                 HStack(alignment: .top) {
-                    VStack(alignment: .leading){
+                    VStack(alignment: .leading) {
                         Text(data.eventName)
                             .font(.system(size: 28,
                                           weight: .bold,
@@ -100,9 +100,7 @@ struct EventCardDetailModal: View {
                     }
                 } label: {
                     Spacer()
-                    
                     Text("完成")
-                    
                     Spacer()
                 }
                 .padding(15)

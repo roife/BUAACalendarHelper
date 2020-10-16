@@ -8,11 +8,11 @@
 import Foundation
 import EventKit
 
-class AddEventToCalendarViewModel:ObservableObject {
-    @Published var isFinished:Bool = false
-    let eventStore : EKEventStore = EKEventStore()
+class AddEventToCalendarViewModel: ObservableObject {
+    @Published var isFinished: Bool = false
+    let eventStore: EKEventStore = EKEventStore()
     
-    func addEventToCalendar(courses: [Date:[CalendarEvent<CalendarEventDataModel>]]) {
+    func addEventToCalendar(courses: [Date: [CalendarEvent<CalendarEventDataModel>]]) {
         eventStore.requestAccess(to: .event) { (granted, error) in
             guard granted else {
                 return
@@ -26,24 +26,24 @@ class AddEventToCalendarViewModel:ObservableObject {
             
             for (_, eachDayCourse) in courses {
                 for course in eachDayCourse {
-                    let event:EKEvent = EKEvent(eventStore: self.eventStore)
+                    let event: EKEvent = EKEvent(eventStore: self.eventStore)
                     event.title = course.data.eventName
                     event.startDate = course.data.startTime
                     event.endDate = course.data.endTime
                     event.notes = """
-                        编号：\(course.data.courseID)
-                        名称：\(course.data.eventName)
-                        教师：\(course.data.indicatorName)
-                        学分：\(course.data.credit)
-                        类型：\(course.data.courseType)
-                        课时：\(course.data.courseHour)
-                        上课星期：\(course.data.weeks)
-                        上课时间：\(course.data.getStartTimeAsString) ~ \(course.data.getEndTimeAsString)；第 \(course.data.lessons.separate(every: 2, with: ",")) 节课
-                        考查方式：\(course.data.examType)
-                        """
+                                  编号：\(course.data.courseID)
+                                  名称：\(course.data.eventName)
+                                  教师：\(course.data.indicatorName)
+                                  学分：\(course.data.credit)
+                                  类型：\(course.data.courseType)
+                                  课时：\(course.data.courseHour)
+                                  上课星期：\(course.data.weeks)
+                                  上课时间：\(course.data.getStartTimeAsString) ~ \(course.data.getEndTimeAsString)；第 \(course.data.lessons.separate(every: 2, with: ",")) 节课
+                                  考查方式：\(course.data.examType)
+                                  """
                     event.location = course.data.locationName
                     event.calendar = newCalendar
-                    event.alarms = [EKAlarm(relativeOffset: -60*20)]
+                    event.alarms = [EKAlarm(relativeOffset: -60 * 20)]
                     
                     do {
                         try self.eventStore.save(event, span: .thisEvent)
@@ -63,7 +63,7 @@ class AddEventToCalendarViewModel:ObservableObject {
         newCalendar.title = "BUAA Courses \(CalendarUtils.getCurrentYearString()) Term \(CalendarUtils.getCurrentTermString())"
         newCalendar.source = self.eventStore.defaultCalendarForNewEvents?.source
         do {
-            try self.eventStore.saveCalendar(newCalendar, commit:true)
+            try self.eventStore.saveCalendar(newCalendar, commit: true)
         } catch let error {
             print(error)
         }
@@ -89,6 +89,8 @@ class AddEventToCalendarViewModel:ObservableObject {
 
 extension String {
     func separate(every stride: Int = 4, with separator: Character = " ") -> String {
-        return String(enumerated().map { $0 > 0 && $0 % stride == 0 ? [separator, $1] : [$1]}.joined())
+        String(enumerated().map {
+            $0 > 0 && $0 % stride == 0 ? [separator, $1] : [$1]
+        }.joined())
     }
 }

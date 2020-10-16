@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct LoginSheet: View {
-    @Binding var isLoginSheetPresented:Bool
-    @Binding var isUpdating:Bool
-    @Binding var isLogined:Bool
+    @Binding var isLoginSheetPresented: Bool
+    @Binding var isUpdating: Bool
+    @Binding var isLogined: Bool
     @ObservedObject var loginVM = LoginViewModel()
     
-    @State var loginFailed:Bool = false
-    @State var showReloginAlert:Bool = false
+    @State var loginFailed: Bool = false
+    @State var showReloginAlert: Bool = false
     
     var body: some View {
-        if loginVM.isLogining {
+        if loginVM.isLogin {
             ProgressView("登录中...")
                 .progressViewStyle(CircularProgressViewStyle())
                 .onDisappear() {
@@ -39,7 +39,7 @@ struct LoginSheet: View {
                         SecureField("密码", text: $loginVM.password)
                     }
                     Section() {
-                        Button ("登录并更新") {
+                        Button("登录并更新") {
                             if isLogined {
                                 showReloginAlert = true
                             } else {
@@ -50,7 +50,9 @@ struct LoginSheet: View {
                         .alert(isPresented: $showReloginAlert) {
                             Alert(title: Text("登录提醒"),
                                   message: Text("检测到您已经登录账号，是否切换用户？"),
-                                  primaryButton: .destructive(Text("确定")) { loginVM.login(loginSheet: self) },
+                                  primaryButton: .destructive(Text("确定")) {
+                                    loginVM.login(loginSheet: self)
+                                  },
                                   secondaryButton: .cancel(Text("取消")))
                         }
                     }

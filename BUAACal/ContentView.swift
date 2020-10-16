@@ -8,30 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-//    var events:[CalendarEvent<CalendarEventDataModel>] = [
-//            CalendarEvent(dateString: "2020-10-13",
-//                          data: CalendarEventDataModel(courseID: "BH380948",
-//                                                       eventName: "课程名",
-//                                                       startTime: Date(),
-//                                                       endTime: Date(),
-//                                                       weeks: "1, 2, 3, 4",
-//                                                       courseType: "必修",
-//                                                       credit: 2.3,
-//                                                       examType: 1,
-//                                                       lessons: "0203",
-//                                                       indicatorName: "我",
-//                                                       locationName: "地点",
-//                                                       courseHour: "16",
-//                                                       brightColorNumber: 01,
-//                                                       darkColorNumber: 01))
-//        ]
     let events = DataStorage.loadData()
-
-        var body: some View {
-            CalendarList<EventCard>(events: self.events) { event in
-                EventCard(data: event.data)
-            }
+    
+    var body: some View {
+        CalendarList<EventCard>(events: self.events) { event in
+            EventCard(data: event.data)
         }
+    }
 }
 
 

@@ -9,37 +9,33 @@ import SwiftUI
 
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 public struct CalendarList<Content: View>: View {
-    @State private var months:[CalendarMonth]
+    @State private var months: [CalendarMonth]
     @State private var currentPage = 1
     
-    @State public var selectedDate:Date = Date()
+    @State public var selectedDate: Date = Date()
     
     @State public var isLogined = false
     @State public var isLoginSheetPresented = false
     @State public var showAlert = false
     @State public var showModal = false
-    @State private var currentSelectEventData:CalendarEventDataModel?
+    @State private var currentSelectEventData: CalendarEventDataModel?
     
     @ObservedObject var updatingVM = UpdatingViewModel()
     @ObservedObject var addEventVM = AddEventToCalendarViewModel()
     
-    private let calendarDayHeight:CGFloat = 60
-    private let calendar:Calendar
+    private let calendarDayHeight: CGFloat = 60
+    private let calendar: Calendar
     
-    //    private var events:[Date:[CalendarEvent<T>]]
+    private var viewForEventBlock: (CalendarEvent<CalendarEventDataModel>) -> Content
     
-//    private var currentSelectEventData:CalendarEventDataModel
+    private var selectedDateColor: Color
+    private var todayDateColor: Color
     
-    private var viewForEventBlock:(CalendarEvent<CalendarEventDataModel>) -> Content
-    
-    private var selectedDateColor:Color
-    private var todayDateColor:Color
-    
-    public init(initialDate:Date = Date(),
-                calendar:Calendar = Calendar.current,
-                events:[Date:[CalendarEvent<CalendarEventDataModel>]] = [:],
-                selectedDateColor:Color = colorNumbersLight[1],
-                todayDateColor:Color = colorNumbersLight[1].opacity(0.3),
+    public init(initialDate: Date = Date(),
+                calendar: Calendar = Calendar.current,
+                events: [Date: [CalendarEvent<CalendarEventDataModel>]] = [:],
+                selectedDateColor: Color = colorNumbersLight[1],
+                todayDateColor: Color = colorNumbersLight[1].opacity(0.3),
                 @ViewBuilder viewForEvent: @escaping (CalendarEvent<CalendarEventDataModel>) -> Content) {
         
         self.calendar = calendar
@@ -84,15 +80,16 @@ public struct CalendarList<Content: View>: View {
                 
                 HStack(alignment: .top) {
                     PagerView(pageCount: self.months.count, currentIndex: self.$currentPage, pageChanged: self.updateMonthsAfterPagerSwipe) {
-                        ForEach(self.months, id:\.key) { month in
-                            CalendarMonthView<CalendarEventDataModel>(month: month,
-                                              calendar: self.months[1].calendar,
-                                              selectedDate: self.$selectedDate,
-                                              showModal: self.$showModal,
-                                              calendarDayHeight: self.calendarDayHeight,
-                                              eventsForDate: updatingVM.events,
-                                              selectedDateColor: self.selectedDateColor,
-                                              todayDateColor: self.todayDateColor)
+                        ForEach(self.months, id: \.key) { month in
+                            CalendarMonthView<CalendarEventDataModel>(
+                                month: month,
+                                calendar: self.months[1].calendar,
+                                selectedDate: self.$selectedDate,
+                                showModal: self.$showModal,
+                                calendarDayHeight: self.calendarDayHeight,
+                                eventsForDate: updatingVM.events,
+                                selectedDateColor: self.selectedDateColor,
+                                todayDateColor: self.todayDateColor)
                         }
                     }
                 }
@@ -102,7 +99,7 @@ public struct CalendarList<Content: View>: View {
             Divider()
             
             List {
-                ForEach(eventsForSelectedDate(), id:\.data) { event in
+                ForEach(eventsForSelectedDate(), id: \.data) { event in
                     self.viewForEventBlock(event)
                         .onTapGesture {
                             withAnimation {
@@ -116,7 +113,7 @@ public struct CalendarList<Content: View>: View {
         }
     }
     
-    func updateMonthsAfterPagerSwipe(newIndex:Int) {
+    func updateMonthsAfterPagerSwipe(newIndex: Int) {
         let newMonths = self.months[self.currentPage].getSurroundingMonths()
         
         if newIndex == 0 {
@@ -134,7 +131,7 @@ public struct CalendarList<Content: View>: View {
     }
     
     func eventsForSelectedDate() -> [CalendarEvent<CalendarEventDataModel>] {
-        let actualDay = CalendarUtils.resetHourPart(of: self.selectedDate, calendar:self.calendar)
+        let actualDay = CalendarUtils.resetHourPart(of: self.selectedDate, calendar: self.calendar)
         
         return updatingVM.events[actualDay] ?? []
     }
@@ -184,9 +181,10 @@ public struct CalendarList<Content: View>: View {
                 Image(systemName: "person.crop.circle").font(.title2)
             }
             .sheet(isPresented: $isLoginSheetPresented) {
-                LoginSheet(isLoginSheetPresented: $isLoginSheetPresented,
-                           isUpdating: $updatingVM.isUpdating,
-                           isLogined: $isLogined)
+                LoginSheet(
+                    isLoginSheetPresented: $isLoginSheetPresented,
+                    isUpdating: $updatingVM.isUpdating,
+                    isLogined: $isLogined)
             }
         }
     }

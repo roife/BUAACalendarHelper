@@ -9,15 +9,15 @@ import SwiftUI
 
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
 struct CalendarViewDay: View {
-    let calendar:Calendar
-    let day:Date
-    let selected:Bool
-    let hasEvents:Bool
-    let width:CGFloat
-    let height:CGFloat
+    let calendar: Calendar
+    let day: Date
+    let selected: Bool
+    let hasEvents: Bool
+    let width: CGFloat
+    let height: CGFloat
     
-    let selectedDateColor:Color
-    let todayDateColor:Color
+    let selectedDateColor: Color
+    let todayDateColor: Color
     
     var body: some View {
         
