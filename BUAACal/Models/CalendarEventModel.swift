@@ -9,7 +9,7 @@
 import Foundation
 
 @available(iOS 13.0, OSX 10.15, tvOS 13.0, watchOS 6.0, *)
-public struct CalendarEvent<T:Hashable>:Hashable {
+public struct CalendarEvent<T:Hashable & Codable>:Hashable & Codable {
     public var date:Date
     public var data:T
     

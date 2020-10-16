@@ -39,7 +39,7 @@ public struct CalendarList<Content: View>: View {
     
     public init(initialDate:Date = Date(),
                 calendar:Calendar = Calendar.current,
-                events:[CalendarEvent<CalendarEventDataModel>],
+                events:[Date:[CalendarEvent<CalendarEventDataModel>]] = [:],
                 selectedDateColor:Color = colorNumbersLight[1],
                 todayDateColor:Color = colorNumbersLight[1].opacity(0.3),
                 @ViewBuilder viewForEvent: @escaping (CalendarEvent<CalendarEventDataModel>) -> Content) {
@@ -52,7 +52,7 @@ public struct CalendarList<Content: View>: View {
         self.selectedDateColor = selectedDateColor
         self.todayDateColor = todayDateColor
         
-        updatingVM.events = Dictionary<Date, [CalendarEvent<CalendarEventDataModel>]>(grouping: events, by: { $0.date })
+        updatingVM.events = events
     }
     
     public var body: some View {
@@ -87,7 +87,7 @@ public struct CalendarList<Content: View>: View {
                 HStack(alignment: .top) {
                     PagerView(pageCount: self.months.count, currentIndex: self.$currentPage, pageChanged: self.updateMonthsAfterPagerSwipe) {
                         ForEach(self.months, id:\.key) { month in
-                            CalendarMonthView(month: month,
+                            CalendarMonthView<CalendarEventDataModel>(month: month,
                                               calendar: self.months[1].calendar,
                                               selectedDate: self.$selectedDate,
                                               showModal: self.$showModal,

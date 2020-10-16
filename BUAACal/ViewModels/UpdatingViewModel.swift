@@ -21,7 +21,7 @@ class UpdatingViewModel:ObservableObject {
 //        case unsupported
 //    }
     
-    struct eachClassJson:Codable {
+    public struct eachClassJson:Codable {
         let id: String
         let year: String
         let term: String
@@ -42,7 +42,7 @@ class UpdatingViewModel:ObservableObject {
         let totalLength: Int
     }
     
-    struct classJson:Codable {
+    public struct classJson:Codable {
         let c_1: [eachClassJson]?
         let c_2: [eachClassJson]?
         let c_3: [eachClassJson]?
@@ -59,12 +59,12 @@ class UpdatingViewModel:ObservableObject {
         let c_14: [eachClassJson]?
     }
     
-    struct dataJson:Codable {
+    public struct dataJson:Codable {
         let classes: [classJson]
         let weekdays: [String]
     }
     
-    struct resJson:Codable {
+    public struct resJson:Codable {
         let e: Int
         let m: String
         let d: dataJson?
@@ -104,6 +104,7 @@ class UpdatingViewModel:ObservableObject {
                     if cntFinished == 19 {
                         setColors()
                         self.isUpdating.toggle()
+                        DataStorage.saveData(data: events)
                     }
                     print(cntFinished)
                 }

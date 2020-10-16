@@ -29,6 +29,7 @@
 		32C86C5B2528B7B8003E73D5 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */; };
 		32C86C632528E031003E73D5 /* LoginSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C622528E031003E73D5 /* LoginSheet.swift */; };
 		32C86C6C2528E1AA003E73D5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C6B2528E1AA003E73D5 /* LoginViewModel.swift */; };
+		32FBBEEC253974C500459AF6 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FBBEEB253974C500459AF6 /* DataStorage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		32C86C622528E031003E73D5 /* LoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheet.swift; sourceTree = "<group>"; };
 		32C86C6B2528E1AA003E73D5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		32FBBEEB253974C500459AF6 /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 		3208654E2528838400B169D3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				32FBBEEB253974C500459AF6 /* DataStorage.swift */,
 				320865502528838400B169D3 /* CalendarUtils.swift */,
 				32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */,
 			);
@@ -379,6 +382,7 @@
 				320865572528838400B169D3 /* CalendarList.swift in Sources */,
 				320865542528838400B169D3 /* CalendarMonthView.swift in Sources */,
 				320865522528838400B169D3 /* CalendarEventModel.swift in Sources */,
+				32FBBEEC253974C500459AF6 /* DataStorage.swift in Sources */,
 				328AA83C2530DC6E00A3B765 /* AddEventToCalendarViewModel.swift in Sources */,
 				320865182528836900B169D3 /* BUAACalApp.swift in Sources */,
 			);
