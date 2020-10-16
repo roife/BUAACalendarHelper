@@ -29,10 +29,11 @@ struct LoginSheet: View {
         } else {
             NavigationView {
                 Form {
-                    Section(header: Text("登录信息北航")) {
-                        TextField("学号", text: $loginVM.email)
-                            .textContentType(.emailAddress)
-                            .keyboardType(.emailAddress)
+                    Section(header: Text(loginVM.currentUserId.isEmpty ? "登录信息北航"
+                                            : isLogined ? "当前用户：\(loginVM.currentUserId) （已登录）"
+                                            : "当前用户：\(loginVM.currentUserId) （未登录）")) {
+                        TextField("学号", text: $loginVM.userId)
+                            .keyboardType(.numberPad)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
                         SecureField("密码", text: $loginVM.password)
@@ -45,7 +46,7 @@ struct LoginSheet: View {
                                 loginVM.login(loginSheet: self)
                             }
                         }
-                        .disabled(loginVM.email.isEmpty || loginVM.password.isEmpty)
+                        .disabled(loginVM.userId.isEmpty || loginVM.password.isEmpty)
                         .alert(isPresented: $showReloginAlert) {
                             Alert(title: Text("登录提醒"),
                                   message: Text("检测到您已经登录账号，是否切换用户？"),

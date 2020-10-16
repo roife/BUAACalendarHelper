@@ -18,7 +18,6 @@ public struct CalendarList<Content: View>: View {
     @State public var isLoginSheetPresented = false
     @State public var showAlert = false
     @State public var showModal = false
-
     @State private var currentSelectEventData:CalendarEventDataModel?
     
     @ObservedObject var updatingVM = UpdatingViewModel()

@@ -8,21 +8,26 @@
 import Foundation
 
 public struct DataStorage {
-    public static func saveData(data: [Date:[CalendarEvent<CalendarEventDataModel>]]) {
+    public typealias dictDataType = [Date:[CalendarEvent<CalendarEventDataModel>]]
+    
+    public static func saveData(data: dictDataType) {
         let standard = UserDefaults.standard
         standard.set(object: data, forKey: "SavedCourses")
         standard.synchronize()
     }
 
-    public static func loadData() -> [Date:[CalendarEvent<CalendarEventDataModel>]] {
+    public static func loadData() -> dictDataType {
+        return UserDefaults.standard.object(dictDataType.self, with: "SavedCourses") ?? [:]
+    }
+    
+    public static func saveUserId(userId:String) {
         let standard = UserDefaults.standard
-        
-        guard let data = standard.object([Date:[CalendarEvent<CalendarEventDataModel>]].self,
-                                         with: "SavedCourses") else {
-            return [:]
-        }
-        
-        return data
+        standard.setValue(userId, forKey: "userId")
+        standard.synchronize()
+    }
+    
+    public static func loadUserId() -> String {
+        return UserDefaults.standard.string(forKey: "userId") ?? ""
     }
 }
 

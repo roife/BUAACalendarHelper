@@ -9,9 +9,10 @@ import Foundation
 
 class LoginViewModel:ObservableObject {
     // MARK: Login Info
-    @Published var email:String = ""
+    @Published var userId:String = ""
     @Published var password:String = ""
     @Published var isLogining:Bool = false
+    @Published var currentUserId = DataStorage.loadUserId()
     
     struct EmptyStruct:Codable {}
     
@@ -26,7 +27,7 @@ class LoginViewModel:ObservableObject {
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
         let body: [String: Any] = [
-            "username": email,
+            "username": userId,
             "password": password
         ]
         request.setValue("application/x-www-form-urlencoded; charset=utf-8",
@@ -69,6 +70,8 @@ class LoginViewModel:ObservableObject {
                 DispatchQueue.main.async {
                     loginSheet.isUpdating.toggle()
                     loginSheet.isLogined = true
+                    self.currentUserId = self.userId
+                    DataStorage.saveUserId(userId: self.currentUserId)
                 }
             }
         }
