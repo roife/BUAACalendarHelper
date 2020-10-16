@@ -39,16 +39,14 @@ struct LoginSheet: View {
                     Section {
                         Button ("登录并更新") {
                             loginVM.login(loginSheet: self)
-//                            self.isLoginSheetPresented.toggle()
-//                            self.isUpdating.toggle()
-//                            self.isLogined = true
                         }
+                        .disabled(loginVM.email.isEmpty || loginVM.password.isEmpty)
                     }
                 }
                 .navigationBarTitle(Text("登录"), displayMode: .inline)
             }
             .alert(isPresented: $loginFailed) {
-                Alert(title: Text("登陆失败"), message: Text("请检查学号和密码是否输入正确"), dismissButton: .default(Text("好")))
+                Alert(title: Text("登陆发生错误"), message: Text("请检查学号和密码是否输入正确"), dismissButton: .default(Text("好")))
             }
         }
     }

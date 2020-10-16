@@ -106,7 +106,10 @@ struct EventCardDetailModal: View {
                     Spacer()
                 }
                 .padding(15)
-                .background(colorScheme == .light ? colorNumbersLight[data.brightColorNumber] : colorNumbers[data.darkColorNumber])
+                .background(colorScheme == .light
+                                ? colorNumbersLight[data.brightColorNumber]
+                                : colorNumbers[data.darkColorNumber])
+                .foregroundColor(colorScheme == .light ? .black : .white)
                 .cornerRadius(45)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .shadow(radius: 1)

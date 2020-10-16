@@ -3,7 +3,6 @@
 //  CalendarList
 //
 //  Created by roife on 3/11/20.
-//  Copyright © 2020 CalendarList. All rights reserved.
 //
 
 import SwiftUI
@@ -173,7 +172,7 @@ public struct CalendarList<Content: View>: View {
                 Image(systemName: "arrow.2.circlepath").font(.title2)
             }
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("登陆"), message: Text("需要登录之后才能更新课表！"), dismissButton: .default(Text("好")))
+                Alert(title: Text("登录"), message: Text("需要重新登录之后才能更新课表！"), dismissButton: .default(Text("好")))
             }
             .padding(.trailing, 10)
             
