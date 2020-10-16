@@ -11,8 +11,6 @@
 		3208651A2528836900B169D3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865192528836900B169D3 /* ContentView.swift */; };
 		3208651C2528836A00B169D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3208651B2528836A00B169D3 /* Assets.xcassets */; };
 		3208651F2528836A00B169D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3208651E2528836A00B169D3 /* Preview Assets.xcassets */; };
-		3208652A2528836A00B169D3 /* BUAACalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865292528836A00B169D3 /* BUAACalTests.swift */; };
-		320865352528836A00B169D3 /* BUAACalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865342528836A00B169D3 /* BUAACalUITests.swift */; };
 		320865512528838400B169D3 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865452528838400B169D3 /* PagerView.swift */; };
 		320865522528838400B169D3 /* CalendarEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865472528838400B169D3 /* CalendarEventModel.swift */; };
 		320865532528838400B169D3 /* CalendarMonthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865482528838400B169D3 /* CalendarMonthModel.swift */; };
@@ -57,11 +55,7 @@
 		3208651E2528836A00B169D3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		320865202528836A00B169D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		320865252528836A00B169D3 /* BUAACalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BUAACalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		320865292528836A00B169D3 /* BUAACalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUAACalTests.swift; sourceTree = "<group>"; };
-		3208652B2528836A00B169D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		320865302528836A00B169D3 /* BUAACalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BUAACalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		320865342528836A00B169D3 /* BUAACalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUAACalUITests.swift; sourceTree = "<group>"; };
-		320865362528836A00B169D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		320865452528838400B169D3 /* PagerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerView.swift; sourceTree = "<group>"; };
 		320865472528838400B169D3 /* CalendarEventModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarEventModel.swift; sourceTree = "<group>"; };
 		320865482528838400B169D3 /* CalendarMonthModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarMonthModel.swift; sourceTree = "<group>"; };
@@ -110,8 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				320865162528836900B169D3 /* BUAACal */,
-				320865282528836A00B169D3 /* BUAACalTests */,
-				320865332528836A00B169D3 /* BUAACalUITests */,
 				320865152528836900B169D3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -148,24 +140,6 @@
 				3208651E2528836A00B169D3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		320865282528836A00B169D3 /* BUAACalTests */ = {
-			isa = PBXGroup;
-			children = (
-				320865292528836A00B169D3 /* BUAACalTests.swift */,
-				3208652B2528836A00B169D3 /* Info.plist */,
-			);
-			path = BUAACalTests;
-			sourceTree = "<group>";
-		};
-		320865332528836A00B169D3 /* BUAACalUITests */ = {
-			isa = PBXGroup;
-			children = (
-				320865342528836A00B169D3 /* BUAACalUITests.swift */,
-				320865362528836A00B169D3 /* Info.plist */,
-			);
-			path = BUAACalUITests;
 			sourceTree = "<group>";
 		};
 		320865462528838400B169D3 /* Models */ = {
@@ -392,7 +366,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3208652A2528836A00B169D3 /* BUAACalTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +373,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				320865352528836A00B169D3 /* BUAACalUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
