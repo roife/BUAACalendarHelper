@@ -10,7 +10,7 @@ import EventKit
 
 class AddEventToCalendarViewModel: ObservableObject {
     @Published var isFinished: Bool = false
-    let eventStore: EKEventStore = EKEventStore()
+    private let eventStore: EKEventStore = EKEventStore()
     
     func addEventToCalendar(courses: [Date: [CalendarEvent<CalendarEventDataModel>]]) {
         eventStore.requestAccess(to: .event) { (granted, error) in
@@ -56,7 +56,7 @@ class AddEventToCalendarViewModel: ObservableObject {
         self.isFinished = true
     }
     
-    func createNewCalendar() -> EKCalendar {
+    private func createNewCalendar() -> EKCalendar {
         self.removeExistedEvents();
         
         let newCalendar = EKCalendar(for: .event, eventStore: self.eventStore)
@@ -71,7 +71,7 @@ class AddEventToCalendarViewModel: ObservableObject {
         return newCalendar;
     }
     
-    func removeExistedEvents() {
+    private func removeExistedEvents() {
         let calendars = eventStore.calendars(for: .event)
         let buaaCalTitle = "BUAA Courses \(CalendarUtils.getCurrentYearString()) Term \(CalendarUtils.getCurrentTermString())"
         

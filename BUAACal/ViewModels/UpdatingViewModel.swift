@@ -15,7 +15,7 @@ class UpdatingViewModel: ObservableObject {
     private var courseIdSet: Set<String> = []
     
     //MARK: JSON TYPE
-    public struct eachClassJson: Codable {
+    private struct eachClassJson: Codable {
         let id: String
         let year: String
         let term: String
@@ -36,7 +36,7 @@ class UpdatingViewModel: ObservableObject {
         let totalLength: Int
     }
     
-    public struct classJson: Codable {
+    private struct classJson: Codable {
         let c_1: [eachClassJson]?
         let c_2: [eachClassJson]?
         let c_3: [eachClassJson]?
@@ -53,12 +53,12 @@ class UpdatingViewModel: ObservableObject {
         let c_14: [eachClassJson]?
     }
     
-    public struct dataJson: Codable {
+    private struct dataJson: Codable {
         let classes: [classJson]
         let weekdays: [String]
     }
     
-    public struct resJson: Codable {
+    private struct resJson: Codable {
         let e: Int
         let m: String
         let d: dataJson?
@@ -134,7 +134,7 @@ class UpdatingViewModel: ObservableObject {
         }
     }
     
-    func setColors() {
+    private func setColors() {
         let courseIdArr = Array(courseIdSet)
         
         for (date, courseArr) in events {
@@ -146,7 +146,7 @@ class UpdatingViewModel: ObservableObject {
         }
     }
     
-    func processCourse(days: [classJson], weekdays: [String]) {
+    private func processCourse(days: [classJson], weekdays: [String]) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         
@@ -224,7 +224,7 @@ class UpdatingViewModel: ObservableObject {
         }
     }
     
-    func decodeJson(data: Data?) -> resJson? {
+    private func decodeJson(data: Data?) -> resJson? {
         let responseString = String(data: data!, encoding: .utf8)
         let decoder = JSONDecoder()
         

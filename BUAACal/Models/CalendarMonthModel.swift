@@ -1,8 +1,7 @@
 //
 //  CalendarMonth.swift
-//  CalendarList
 //
-//  Created by roife Beato on 3/11/20.
+//  Created by roife on 3/11/20.
 //
 
 import Foundation

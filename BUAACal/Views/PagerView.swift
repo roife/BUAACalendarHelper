@@ -1,6 +1,5 @@
 //
 //  PagerView.swift
-//  CalendarList
 //
 //  Created by roife on 3/11/20.
 //  Copyright © 2020 roife. All rights reserved.

@@ -14,10 +14,10 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var isLogin: Bool = false
     
-    struct EmptyStruct: Codable {
+    private struct EmptyStruct: Codable {
     }
     
-    struct resJson: Codable {
+    private struct resJson: Codable {
         let e: Int
         let m: String
         let d: EmptyStruct?
@@ -85,7 +85,7 @@ class LoginViewModel: ObservableObject {
         task.resume()
     }
     
-    func decodeLoginResJson(responseString: String?) -> resJson? {
+    private func decodeLoginResJson(responseString: String?) -> resJson? {
         let decoder = JSONDecoder()
         
         do {
