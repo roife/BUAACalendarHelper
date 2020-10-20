@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		320865182528836900B169D3 /* BUAACalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865172528836900B169D3 /* BUAACalApp.swift */; };
 		3208651A2528836900B169D3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865192528836900B169D3 /* ContentView.swift */; };
-		3208651C2528836A00B169D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3208651B2528836A00B169D3 /* Assets.xcassets */; };
 		3208651F2528836A00B169D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3208651E2528836A00B169D3 /* Preview Assets.xcassets */; };
 		320865512528838400B169D3 /* PagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865452528838400B169D3 /* PagerView.swift */; };
 		320865522528838400B169D3 /* CalendarEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320865472528838400B169D3 /* CalendarEventModel.swift */; };
@@ -24,6 +23,7 @@
 		328AA83C2530DC6E00A3B765 /* AddEventToCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328AA83B2530DC6E00A3B765 /* AddEventToCalendarViewModel.swift */; };
 		329BE22E2535AFE300FD14E5 /* EventCardDetailModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329BE22D2535AFE300FD14E5 /* EventCardDetailModal.swift */; };
 		32A2B8C025290F110025BDCD /* UpdatingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A2B8BF25290F110025BDCD /* UpdatingViewModel.swift */; };
+		32AB07E7253E6EC60084D727 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32AB07E6253E6EC60084D727 /* Assets.xcassets */; };
 		32C86C5B2528B7B8003E73D5 /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */; };
 		32C86C632528E031003E73D5 /* LoginSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C622528E031003E73D5 /* LoginSheet.swift */; };
 		32C86C6C2528E1AA003E73D5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C86C6B2528E1AA003E73D5 /* LoginViewModel.swift */; };
@@ -51,7 +51,6 @@
 		320865142528836900B169D3 /* BUAACal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BUAACal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		320865172528836900B169D3 /* BUAACalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BUAACalApp.swift; sourceTree = "<group>"; };
 		320865192528836900B169D3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		3208651B2528836A00B169D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3208651E2528836A00B169D3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		320865202528836A00B169D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		320865252528836A00B169D3 /* BUAACalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BUAACalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +68,7 @@
 		328AA83B2530DC6E00A3B765 /* AddEventToCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventToCalendarViewModel.swift; sourceTree = "<group>"; };
 		329BE22D2535AFE300FD14E5 /* EventCardDetailModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCardDetailModal.swift; sourceTree = "<group>"; };
 		32A2B8BF25290F110025BDCD /* UpdatingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatingViewModel.swift; sourceTree = "<group>"; };
+		32AB07E6253E6EC60084D727 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32C86C5A2528B7B8003E73D5 /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		32C86C622528E031003E73D5 /* LoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheet.swift; sourceTree = "<group>"; };
 		32C86C6B2528E1AA003E73D5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 				320865462528838400B169D3 /* Models */,
 				320865172528836900B169D3 /* BUAACalApp.swift */,
 				320865192528836900B169D3 /* ContentView.swift */,
-				3208651B2528836A00B169D3 /* Assets.xcassets */,
 				320865202528836A00B169D3 /* Info.plist */,
+				32AB07E6253E6EC60084D727 /* Assets.xcassets */,
 				3208651D2528836A00B169D3 /* Preview Content */,
 			);
 			path = BUAACal;
@@ -314,8 +314,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32AB07E7253E6EC60084D727 /* Assets.xcassets in Resources */,
 				3208651F2528836A00B169D3 /* Preview Assets.xcassets in Resources */,
-				3208651C2528836A00B169D3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
